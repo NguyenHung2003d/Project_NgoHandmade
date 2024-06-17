@@ -1,0 +1,169 @@
+﻿@model IEnumerable<giadinhthoxinh.Models.tblPromote>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+}
+
+<section class="content-header p-2">
+</section>
+
+<section class="content ml-2 mr-2">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3 class="card-title text-lg text-danger">Danh sách khuyến mãi</h3>
+
+            @using (Html.BeginForm("Index", "Promotes", FormMethod.Get))
+            {
+                <select name="supplierID" onchange="this.form.submit()">
+                    <option value=""> Chọn cửa hàng </option>
+                    @foreach (var item in ViewBag.Suppliers)
+                    {
+                        <option value="@item.Value" @(item.Value == ViewBag.SelectedSupplierID?.ToString() ? "selected" : "")>@item.Text</option>
+                    }
+                </select>
+            }
+        </div>
+
+        <div class="card-body table-responsive text-nowrap">
+            @if (Model.Count() == 0)
+            {
+                <div class="mx-auto">
+                    <div class="text-center">
+                        <p>Chưa có danh mục sản phẩm nào</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <table class="table table-hover table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>
+                                Tên mã khuyến mãi
+                            </th>
+                            <th>
+                                Giá trị khuyến mãi (%)
+                            </th>
+                            <th>
+                                Ngày bắt đầu
+                            </th>
+                            <th>
+                                Ngày kết thúc
+                            </th>
+                            <th>
+                                Hành động
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sPromoteName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sPromoteRate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dtStartDay)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dtEndDay)
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        @Html.ActionLink("Sửa", "Edit", new { id = item.PK_iPromoteID }, new { @class = "btn btn-primary btn-warning mr-2" })
+
+                                        @using (Html.BeginForm("Delete", "Promotes", FormMethod.Post, new { id = @item.PK_iPromoteID.ToString() + 's' }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("id", item.PK_iPromoteID)
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@item.PK_iPromoteID">
+                                                Xóa
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="@item.PK_iPromoteID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Cảnh báo</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Bạn chắc chắn muốn xóa khuyến mãi: @item.PK_iPromoteID
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <input type="submit" value="Xóa" class="btn btn-danger" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <div class="card-tools text-center">
+                @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</section>
+@section Scripts {
+    @foreach (var item in Model)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var id = '#' + @item.PK_iPromoteID.ToString() + 's'
+                console.log(id);
+                $(id).submit(function (e) {
+                    e.preventDefault(); // Prevent the default form submission
+
+                    $.ajax({
+                        type: $(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(), // Serialize the form data
+                        success: function (response) {
+                            // Handle the JSON response here
+                            if (response.success) {
+                                location.reload();
+                            } else {
+                                alert(response.message);
+                                location.reload();
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle any errors here
+                            console.error(xhr, status, error);
+                            alert("Đã có lỗi, thử lại lần sau");
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        </script>
+
+    }
+}

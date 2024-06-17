@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "VNPay Return";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <div class="row d-flex justify-content-center my-4">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    <h4 class="mb-0">Kết quả thanh toán</h4>
+                </div>
+                <div class="card-body">
+                    <p>@ViewBag.Message</p>
+                    <div class="mt-4">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Quay về trang chủ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

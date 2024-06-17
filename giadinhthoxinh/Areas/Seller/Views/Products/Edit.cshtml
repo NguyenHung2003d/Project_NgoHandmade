@@ -1,0 +1,107 @@
+﻿@model giadinhthoxinh.Models.tblProduct
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+}
+
+<section class="content-header p-2">
+</section>
+
+<section class="content ml-2 mr-2">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-danger text-lg ">Sửa thông tin sản phẩm</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("edit", "products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal d-flex">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.PK_iProductID)
+                    @Html.HiddenFor(model => model.FK_iSupplierID)
+
+                    <div class="w-75 m-auto container">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="control-label" for="sProductName">Tên sản phẩm</label>
+                                    @Html.EditorFor(model => model.sProductName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.sProductName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="FK_iCategoryID">Danh mục</label>
+                                    @Html.DropDownList("FK_iCategoryID", null, htmlAttributes: new { @class = "form-control", @style = "height:34.2px" })
+                                    @Html.ValidationMessageFor(model => model.FK_iCategoryID, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="sDescribe">Mô tả</label>
+                                    @Html.EditorFor(model => model.sDescribe, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.sDescribe, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="control-label" for="fPrice">Giá thành</label>
+                                    @Html.EditorFor(model => model.fPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.fPrice, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="FK_iPromoteID">Mã giảm giá</label>
+                                    @Html.DropDownList("FK_iPromoteID", null, htmlAttributes: new { @class = "form-control", @style = "height:34.2px" })
+                                    @Html.ValidationMessageFor(model => model.FK_iPromoteID, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="sUnit">ĐVT</label>
+                                    @Html.EditorFor(model => model.sUnit, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.sUnit, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="control-label" for="sColor">Màu sắc</label>
+                                    @Html.EditorFor(model => model.sColor, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.sColor, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="sSize">Kích cỡ</label>
+                                    @Html.EditorFor(model => model.sSize, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.sSize, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label">Hình ảnh</label>
+                                    <input type="file" name="fileAnh" />
+                                    @Html.ValidationMessageFor(model => model.sImage, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="w-100 d-flex">
+                            <div class="m-auto">
+                                @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary btn-secondary mr-2 " })
+                                <input type="submit" value="Lưu" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>

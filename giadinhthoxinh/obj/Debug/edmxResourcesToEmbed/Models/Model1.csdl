@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="giadinhthoxinhModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblCategory">
+    <Key>
+      <PropertyRef Name="PK_iCategoryID" />
+    </Key>
+    <Property Name="PK_iCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iSupplierID" Type="Int32" Nullable="false" />
+    <Property Name="sCategoryName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblSupplier" Relationship="Self.fk_category_supplier" FromRole="tblCategory" ToRole="tblSupplier" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.fk_product_category" FromRole="tblCategory" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="tblCheckinDetail">
+    <Key>
+      <PropertyRef Name="PK_iCheckinDetailID" />
+    </Key>
+    <Property Name="PK_iCheckinDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iImportOrderID" Type="Int32" Nullable="false" />
+    <Property Name="FK_iProductID" Type="Int32" />
+    <Property Name="iQuatity" Type="Int32" />
+    <Property Name="fPrice" Type="Double" />
+    <NavigationProperty Name="tblImportOrder" Relationship="Self.fk_checkinDetail_importOrder" FromRole="tblCheckinDetail" ToRole="tblImportOrder" />
+    <NavigationProperty Name="tblProduct" Relationship="Self.fk_checkinDetail_product" FromRole="tblCheckinDetail" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="tblCheckoutDetail">
+    <Key>
+      <PropertyRef Name="PK_iCheckoutDetailID" />
+    </Key>
+    <Property Name="PK_iCheckoutDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iOrderID" Type="Int32" Nullable="false" />
+    <Property Name="FK_iProductID" Type="Int32" />
+    <Property Name="iQuantity" Type="Int32" />
+    <Property Name="fPrice" Type="Double" />
+    <NavigationProperty Name="tblOrder" Relationship="Self.fk_checkoutDetail_order" FromRole="tblCheckoutDetail" ToRole="tblOrder" />
+    <NavigationProperty Name="tblProduct" Relationship="Self.fk_checkoutDetail_product" FromRole="tblCheckoutDetail" ToRole="tblProduct" />
+  </EntityType>
+  <EntityType Name="tblImage">
+    <Key>
+      <PropertyRef Name="PK_iImageID" />
+    </Key>
+    <Property Name="PK_iImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sImage" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblImportOrder">
+    <Key>
+      <PropertyRef Name="PK_iImportOrderID" />
+    </Key>
+    <Property Name="PK_iImportOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iAccountID" Type="Int32" Nullable="false" />
+    <Property Name="FK_iSupplierID" Type="Int32" Nullable="false" />
+    <Property Name="dtDateAdded" Type="DateTime" Precision="3" />
+    <Property Name="sDeliver" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="iState" Type="Int32" />
+    <NavigationProperty Name="tblCheckinDetails" Relationship="Self.fk_checkinDetail_importOrder" FromRole="tblImportOrder" ToRole="tblCheckinDetail" />
+    <NavigationProperty Name="tblUser" Relationship="Self.fk_importOrder_account" FromRole="tblImportOrder" ToRole="tblUser" />
+    <NavigationProperty Name="tblSupplier" Relationship="Self.fk_importOrder_supplier" FromRole="tblImportOrder" ToRole="tblSupplier" />
+  </EntityType>
+  <EntityType Name="tblOrder">
+    <Key>
+      <PropertyRef Name="PK_iOrderID" />
+    </Key>
+    <Property Name="PK_iOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iAccountID" Type="Int32" Nullable="false" />
+    <Property Name="sCustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sCustomerPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="sDeliveryAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="dInvoidDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sBiller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="iDeliveryMethod" Type="Int32" />
+    <Property Name="fSurcharge" Type="Double" />
+    <Property Name="iPaid" Type="Int32" />
+    <Property Name="sState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="iTotal" Type="Int32" />
+    <NavigationProperty Name="tblCheckoutDetails" Relationship="Self.fk_checkoutDetail_order" FromRole="tblOrder" ToRole="tblCheckoutDetail" />
+    <NavigationProperty Name="tblUser" Relationship="Self.fk_order_account" FromRole="tblOrder" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblPermission">
+    <Key>
+      <PropertyRef Name="PK_iPermissionID" />
+    </Key>
+    <Property Name="PK_iPermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sPermissionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="iState" Type="Int32" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.fk_user_permission" FromRole="tblPermission" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblProduct">
+    <Key>
+      <PropertyRef Name="PK_iProductID" />
+    </Key>
+    <Property Name="PK_iProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iSupplierID" Type="Int32" Nullable="false" />
+    <Property Name="FK_iCategoryID" Type="Int32" Nullable="false" />
+    <Property Name="FK_iPromoteID" Type="Int32" Nullable="false" />
+    <Property Name="sProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="sDescribe" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="fPrice" Type="Double" />
+    <Property Name="sColor" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="sSize" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="sImage" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="sUnit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="iQuantity" Type="Int32" />
+    <Property Name="iState" Type="Int32" />
+    <NavigationProperty Name="tblCategory" Relationship="Self.fk_product_category" FromRole="tblProduct" ToRole="tblCategory" />
+    <NavigationProperty Name="tblCheckinDetails" Relationship="Self.fk_checkinDetail_product" FromRole="tblProduct" ToRole="tblCheckinDetail" />
+    <NavigationProperty Name="tblCheckoutDetails" Relationship="Self.fk_checkoutDetail_product" FromRole="tblProduct" ToRole="tblCheckoutDetail" />
+    <NavigationProperty Name="tblPromote" Relationship="Self.fk_product_promote" FromRole="tblProduct" ToRole="tblPromote" />
+    <NavigationProperty Name="tblSupplier" Relationship="Self.fk_product_supplier" FromRole="tblProduct" ToRole="tblSupplier" />
+    <NavigationProperty Name="tblReviews" Relationship="Self.fk_review_product" FromRole="tblProduct" ToRole="tblReview" />
+  </EntityType>
+  <EntityType Name="tblProductColor">
+    <Key>
+      <PropertyRef Name="PK_iProductColorID" />
+    </Key>
+    <Property Name="PK_iProductColorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sProductColor" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblProductPrice">
+    <Key>
+      <PropertyRef Name="PK_iProductPriceID" />
+    </Key>
+    <Property Name="PK_iProductPriceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fPrice" Type="Double" />
+    <Property Name="dtStartDay" Type="DateTime" Precision="3" />
+    <Property Name="dtEndDay" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblProductSize">
+    <Key>
+      <PropertyRef Name="PK_iProductSizeID" />
+    </Key>
+    <Property Name="PK_iProductSizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sSizeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblPromote">
+    <Key>
+      <PropertyRef Name="PK_iPromoteID" />
+    </Key>
+    <Property Name="PK_iPromoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iSupplierID" Type="Int32" Nullable="false" />
+    <Property Name="sPromoteName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="sPromoteRate" Type="Double" />
+    <Property Name="dtStartDay" Type="DateTime" Precision="3" />
+    <Property Name="dtEndDay" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.fk_product_promote" FromRole="tblPromote" ToRole="tblProduct" />
+    <NavigationProperty Name="tblSupplier" Relationship="Self.fk_promote_supplier" FromRole="tblPromote" ToRole="tblSupplier" />
+  </EntityType>
+  <EntityType Name="tblReview">
+    <Key>
+      <PropertyRef Name="PK_iReviewID" />
+    </Key>
+    <Property Name="PK_iReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iProductID" Type="Int32" Nullable="false" />
+    <Property Name="FK_iAccountID" Type="Int32" Nullable="false" />
+    <Property Name="iStarRating" Type="Int32" />
+    <Property Name="dtReviewTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblProduct" Relationship="Self.fk_review_product" FromRole="tblReview" ToRole="tblProduct" />
+    <NavigationProperty Name="tblUser" Relationship="Self.fk_review_account" FromRole="tblReview" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblSupplier">
+    <Key>
+      <PropertyRef Name="PK_iSupplierID" />
+    </Key>
+    <Property Name="PK_iSupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iAccountID" Type="Int32" Nullable="false" />
+    <Property Name="sSupplierName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="sPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="sEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="iState" Type="Int32" />
+    <NavigationProperty Name="tblCategories" Relationship="Self.fk_category_supplier" FromRole="tblSupplier" ToRole="tblCategory" />
+    <NavigationProperty Name="tblImportOrders" Relationship="Self.fk_importOrder_supplier" FromRole="tblSupplier" ToRole="tblImportOrder" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.fk_product_supplier" FromRole="tblSupplier" ToRole="tblProduct" />
+    <NavigationProperty Name="tblPromotes" Relationship="Self.fk_promote_supplier" FromRole="tblSupplier" ToRole="tblPromote" />
+    <NavigationProperty Name="tblUser" Relationship="Self.fk_supplier_account" FromRole="tblSupplier" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="PK_iAccountID" />
+    </Key>
+    <Property Name="PK_iAccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_iPermissionID" Type="Int32" Nullable="false" />
+    <Property Name="sEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sPass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="sAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="iState" Type="Int32" />
+    <NavigationProperty Name="tblImportOrders" Relationship="Self.fk_importOrder_account" FromRole="tblUser" ToRole="tblImportOrder" />
+    <NavigationProperty Name="tblOrders" Relationship="Self.fk_order_account" FromRole="tblUser" ToRole="tblOrder" />
+    <NavigationProperty Name="tblPermission" Relationship="Self.fk_user_permission" FromRole="tblUser" ToRole="tblPermission" />
+    <NavigationProperty Name="tblReviews" Relationship="Self.fk_review_account" FromRole="tblUser" ToRole="tblReview" />
+    <NavigationProperty Name="tblSuppliers" Relationship="Self.fk_supplier_account" FromRole="tblUser" ToRole="tblSupplier" />
+  </EntityType>
+  <Association Name="fk_category_supplier">
+    <End Role="tblSupplier" Type="Self.tblSupplier" Multiplicity="1" />
+    <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSupplier">
+        <PropertyRef Name="PK_iSupplierID" />
+      </Principal>
+      <Dependent Role="tblCategory">
+        <PropertyRef Name="FK_iSupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_product_category">
+    <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCategory">
+        <PropertyRef Name="PK_iCategoryID" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="FK_iCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_checkinDetail_importOrder">
+    <End Role="tblImportOrder" Type="Self.tblImportOrder" Multiplicity="1" />
+    <End Role="tblCheckinDetail" Type="Self.tblCheckinDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblImportOrder">
+        <PropertyRef Name="PK_iImportOrderID" />
+      </Principal>
+      <Dependent Role="tblCheckinDetail">
+        <PropertyRef Name="FK_iImportOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_checkinDetail_product">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1" />
+    <End Role="tblCheckinDetail" Type="Self.tblCheckinDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="PK_iProductID" />
+      </Principal>
+      <Dependent Role="tblCheckinDetail">
+        <PropertyRef Name="FK_iProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_checkoutDetail_order">
+    <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1" />
+    <End Role="tblCheckoutDetail" Type="Self.tblCheckoutDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrder">
+        <PropertyRef Name="PK_iOrderID" />
+      </Principal>
+      <Dependent Role="tblCheckoutDetail">
+        <PropertyRef Name="FK_iOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_checkoutDetail_product">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="0..1" />
+    <End Role="tblCheckoutDetail" Type="Self.tblCheckoutDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="PK_iProductID" />
+      </Principal>
+      <Dependent Role="tblCheckoutDetail">
+        <PropertyRef Name="FK_iProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_importOrder_account">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblImportOrder" Type="Self.tblImportOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="PK_iAccountID" />
+      </Principal>
+      <Dependent Role="tblImportOrder">
+        <PropertyRef Name="FK_iAccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_importOrder_supplier">
+    <End Role="tblSupplier" Type="Self.tblSupplier" Multiplicity="1" />
+    <End Role="tblImportOrder" Type="Self.tblImportOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSupplier">
+        <PropertyRef Name="PK_iSupplierID" />
+      </Principal>
+      <Dependent Role="tblImportOrder">
+        <PropertyRef Name="FK_iSupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_order_account">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="PK_iAccountID" />
+      </Principal>
+      <Dependent Role="tblOrder">
+        <PropertyRef Name="FK_iAccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_user_permission">
+    <End Role="tblPermission" Type="Self.tblPermission" Multiplicity="1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPermission">
+        <PropertyRef Name="PK_iPermissionID" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="FK_iPermissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_product_promote">
+    <End Role="tblPromote" Type="Self.tblPromote" Multiplicity="1" />
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPromote">
+        <PropertyRef Name="PK_iPromoteID" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="FK_iPromoteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_product_supplier">
+    <End Role="tblSupplier" Type="Self.tblSupplier" Multiplicity="1" />
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSupplier">
+        <PropertyRef Name="PK_iSupplierID" />
+      </Principal>
+      <Dependent Role="tblProduct">
+        <PropertyRef Name="FK_iSupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_review_product">
+    <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+    <End Role="tblReview" Type="Self.tblReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProduct">
+        <PropertyRef Name="PK_iProductID" />
+      </Principal>
+      <Dependent Role="tblReview">
+        <PropertyRef Name="FK_iProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promote_supplier">
+    <End Role="tblSupplier" Type="Self.tblSupplier" Multiplicity="1" />
+    <End Role="tblPromote" Type="Self.tblPromote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSupplier">
+        <PropertyRef Name="PK_iSupplierID" />
+      </Principal>
+      <Dependent Role="tblPromote">
+        <PropertyRef Name="FK_iSupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_review_account">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblReview" Type="Self.tblReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="PK_iAccountID" />
+      </Principal>
+      <Dependent Role="tblReview">
+        <PropertyRef Name="FK_iAccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_supplier_account">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblSupplier" Type="Self.tblSupplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="PK_iAccountID" />
+      </Principal>
+      <Dependent Role="tblSupplier">
+        <PropertyRef Name="FK_iAccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="giadinhthoxinhEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
+    <EntitySet Name="tblCheckinDetails" EntityType="Self.tblCheckinDetail" />
+    <EntitySet Name="tblCheckoutDetails" EntityType="Self.tblCheckoutDetail" />
+    <EntitySet Name="tblImages" EntityType="Self.tblImage" />
+    <EntitySet Name="tblImportOrders" EntityType="Self.tblImportOrder" />
+    <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
+    <EntitySet Name="tblPermissions" EntityType="Self.tblPermission" />
+    <EntitySet Name="tblProducts" EntityType="Self.tblProduct" />
+    <EntitySet Name="tblProductColors" EntityType="Self.tblProductColor" />
+    <EntitySet Name="tblProductPrices" EntityType="Self.tblProductPrice" />
+    <EntitySet Name="tblProductSizes" EntityType="Self.tblProductSize" />
+    <EntitySet Name="tblPromotes" EntityType="Self.tblPromote" />
+    <EntitySet Name="tblReviews" EntityType="Self.tblReview" />
+    <EntitySet Name="tblSuppliers" EntityType="Self.tblSupplier" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <AssociationSet Name="fk_category_supplier" Association="Self.fk_category_supplier">
+      <End Role="tblSupplier" EntitySet="tblSuppliers" />
+      <End Role="tblCategory" EntitySet="tblCategories" />
+    </AssociationSet>
+    <AssociationSet Name="fk_product_category" Association="Self.fk_product_category">
+      <End Role="tblCategory" EntitySet="tblCategories" />
+      <End Role="tblProduct" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_checkinDetail_importOrder" Association="Self.fk_checkinDetail_importOrder">
+      <End Role="tblImportOrder" EntitySet="tblImportOrders" />
+      <End Role="tblCheckinDetail" EntitySet="tblCheckinDetails" />
+    </AssociationSet>
+    <AssociationSet Name="fk_checkinDetail_product" Association="Self.fk_checkinDetail_product">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="tblCheckinDetail" EntitySet="tblCheckinDetails" />
+    </AssociationSet>
+    <AssociationSet Name="fk_checkoutDetail_order" Association="Self.fk_checkoutDetail_order">
+      <End Role="tblOrder" EntitySet="tblOrders" />
+      <End Role="tblCheckoutDetail" EntitySet="tblCheckoutDetails" />
+    </AssociationSet>
+    <AssociationSet Name="fk_checkoutDetail_product" Association="Self.fk_checkoutDetail_product">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="tblCheckoutDetail" EntitySet="tblCheckoutDetails" />
+    </AssociationSet>
+    <AssociationSet Name="fk_importOrder_account" Association="Self.fk_importOrder_account">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblImportOrder" EntitySet="tblImportOrders" />
+    </AssociationSet>
+    <AssociationSet Name="fk_importOrder_supplier" Association="Self.fk_importOrder_supplier">
+      <End Role="tblSupplier" EntitySet="tblSuppliers" />
+      <End Role="tblImportOrder" EntitySet="tblImportOrders" />
+    </AssociationSet>
+    <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblOrder" EntitySet="tblOrders" />
+    </AssociationSet>
+    <AssociationSet Name="fk_user_permission" Association="Self.fk_user_permission">
+      <End Role="tblPermission" EntitySet="tblPermissions" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_product_promote" Association="Self.fk_product_promote">
+      <End Role="tblPromote" EntitySet="tblPromotes" />
+      <End Role="tblProduct" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_product_supplier" Association="Self.fk_product_supplier">
+      <End Role="tblSupplier" EntitySet="tblSuppliers" />
+      <End Role="tblProduct" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_review_product" Association="Self.fk_review_product">
+      <End Role="tblProduct" EntitySet="tblProducts" />
+      <End Role="tblReview" EntitySet="tblReviews" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promote_supplier" Association="Self.fk_promote_supplier">
+      <End Role="tblSupplier" EntitySet="tblSuppliers" />
+      <End Role="tblPromote" EntitySet="tblPromotes" />
+    </AssociationSet>
+    <AssociationSet Name="fk_review_account" Association="Self.fk_review_account">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblReview" EntitySet="tblReviews" />
+    </AssociationSet>
+    <AssociationSet Name="fk_supplier_account" Association="Self.fk_supplier_account">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblSupplier" EntitySet="tblSuppliers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

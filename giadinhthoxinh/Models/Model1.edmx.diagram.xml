@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f0325144c68e4ef48ffbbca951444b74" Name="Diagram1">
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblCategory" Width="1.5" PointX="7.5" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblCheckinDetail" Width="1.5" PointX="15" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblCheckoutDetail" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblImage" Width="1.5" PointX="12" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblImportOrder" Width="1.5" PointX="7.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblOrder" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblPermission" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblProduct" Width="1.5" PointX="9.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblProductColor" Width="1.5" PointX="12" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblProductPrice" Width="1.5" PointX="12" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblProductSize" Width="1.5" PointX="12" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblPromote" Width="1.5" PointX="7.5" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblReview" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblSupplier" Width="1.5" PointX="5.25" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="giadinhthoxinhModel.tblUser" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_category_supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_product_category" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_checkinDetail_importOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_checkinDetail_product" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_checkoutDetail_order" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_checkoutDetail_product" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_img_product" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_importOrder_account" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_importOrder_supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_order_account" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_user_permission" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_product_promote" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_product_supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_review_product" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.FK_tblProductColor_tblProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.FK_tblProductPrice_tblProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.FK_tblProductSize_tblProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_promote_supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_review_account" ManuallyRouted="false" />
+        <AssociationConnector Association="giadinhthoxinhModel.fk_supplier_account" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

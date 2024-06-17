@@ -1,0 +1,97 @@
+﻿@model giadinhthoxinh.Models.tblPromote
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+}
+
+<section class="content-header p-2">
+</section>
+
+<section class="content ml-2 mr-2">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-danger text-lg ">Bạn có chắc chắn muốn xóa mã khuyến mãi: <span class="text-primary text-lg">@Model.PK_iPromoteID</span></h3>
+        </div>
+
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.sPromoteName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.sPromoteName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.sPromoteRate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.sPromoteRate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.dtStartDay)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.dtStartDay)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.dtEndDay)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.dtEndDay)
+                </dd>
+
+            </dl>
+
+            <div class="form-actions no-color">
+                @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary btn-secondary" })  |
+                <button id="delete-button" class="btn btn-danger" data-id="@Model.PK_iPromoteID">Xóa</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#delete-button').click(function () {
+                var id = $(this).data('id');
+                $.ajax({
+                    url: '@Url.Action("Delete", "Promotes", new { area = "Seller" })',
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function (response) {
+
+                        alert(response.message)
+
+                        if (response.success) {
+                            setTimeout(function () {
+                                window.location.href = '@Url.Action("Index", "Promotes", new { area = "Seller" })';
+                            }, 2000);
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                    }
+                });
+            });
+        });
+    </script>
+}

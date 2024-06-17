@@ -1,0 +1,164 @@
+﻿@model giadinhthoxinh.Models.tblProduct
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+}
+
+<section class="content-header p-2">
+</section>
+
+<section class="content ml-2 mr-2">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title text-lg text-danger">Thêm sản phẩm</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="bs-stepper-content d-flex w-100">
+                @if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                    <div class="alert alert-success">@ViewBag.Message</div>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.Error))
+                {
+                    <div class="alert alert-danger">@ViewBag.Error</div>
+                }
+                @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data", id = "createForm", style = "width:100%; display:flex;" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="w-75 m-auto container">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="control-label" for="sProductName">Tên sản phẩm</label>
+                                @Html.EditorFor(model => model.sProductName, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                            </div>
+
+                            <div class="form-group m-auto col">
+                                <label class="control-label" for="FK_iSupplierID">Cửa hàng bán</label>
+                                @Html.DropDownList("FK_iSupplierID", ViewBag.FK_iSupplierID as SelectList, "Chọn cửa hàng bán", new { @class = "form-control", id = "supplierDropdown", @style = "height: 32.4px", @required = true })
+                            </div>
+
+                            <div class="form-group m-auto col">
+                                <label class="control-label" for="FK_iCategoryID">Danh mục sản phẩm</label>
+                                @Html.DropDownListFor(model => model.FK_iCategoryID, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"), "Chọn một danh mục", new { @class = "form-control", id = "categoryDropdown", @style = "height: 32.4px", @required = true })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="control-label" for="fPrice">Giá thành</label>
+                                @Html.EditorFor(model => model.fPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="FK_iPromoteID">Mã khuyến mãi</label>
+                                @Html.DropDownListFor(model => model.FK_iPromoteID, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"), "Chọn một mã khuyến mãi", new { @class = "form-control", id = "promoteDropdown", @style = "height: 32.4px", @required = true })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="sDescribe">Mô tả</label>
+                                @Html.TextAreaFor(model => model.sDescribe, new { @class = "form-control", @required = true })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="control-label" for="sColor">Màu sắc</label>
+                                @Html.EditorFor(model => model.sColor, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="sSize">Kích cỡ</label>
+                                @Html.EditorFor(model => model.sSize, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="FK_iPromoteID">Đơn vị</label>
+                                @Html.EditorFor(model => model.sUnit, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="control-label" for="fileAnh">Ảnh sản phẩm</label>
+                                <input type="file" name="fileAnh" required class="form-control" style="height:39px" />
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="iQuantity">Số lượng</label>
+                                @Html.EditorFor(model => model.iQuantity, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                            </div>
+
+                            <div class="form-group col"></div>
+                        </div>
+
+
+                        <div class="form-group col p-0">
+                            <input type="submit" value="Thêm mới" class="btn btn-primary" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#supplierDropdown').change(function () {
+                var supplierId = $(this).val();
+                if (supplierId) {
+                    $.ajax({
+                        url: '@Url.Action("GetCategoriesAndPromotions")',
+                        type: 'GET',
+                        data: { supplierId: supplierId },
+                        success: function (data) {
+                            var categoryDropdown = $('#categoryDropdown');
+                            var promoteDropdown = $('#promoteDropdown');
+
+                            categoryDropdown.empty();
+                            promoteDropdown.empty();
+
+                            categoryDropdown.append($('<option>').text('Select a Category').attr('value', ''));
+                            promoteDropdown.append($('<option>').text('Select a Promote').attr('value', ''));
+
+                            $.each(data.categories, function (i, category) {
+                                categoryDropdown.append($('<option>').text(category.Text).attr('value', category.Value));
+                            });
+
+                            $.each(data.promotes, function (i, promote) {
+                                promoteDropdown.append($('<option>').text(promote.Text).attr('value', promote.Value));
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#createForm').ajaxForm({
+                success: function (response) {
+                    alert('Product created successfully!');
+                },
+                error: function (response) {
+                    alert('An error occurred while creating the product.');
+                }
+            });
+        });
+    </script>
+}

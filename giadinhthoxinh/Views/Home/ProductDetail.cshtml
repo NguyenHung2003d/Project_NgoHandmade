@@ -1,0 +1,190 @@
+﻿@model giadinhthoxinh.Models.tblProduct
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/assets/styles/bootstrap4/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/OwlCarousel2-2.2.1/animate.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/themify-icons/themify-icons.css" rel="stylesheet" />
+<link href="~/Content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/assets/styles/single_styles.css" rel="stylesheet" />
+<link href="~/Content/assets/styles/single_responsive.css" rel="stylesheet" />
+
+@if (Model != null)
+{
+    <div class="container single_product_container">
+        <div class="row">
+            <div class="col">
+
+                <!-- Breadcrumbs -->
+
+                <div class="breadcrumbs d-flex flex-row align-items-center">
+                    <ul>
+                        <li><a href="index.html">Trang chủ</a></li>
+                        <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Chi tiết sản phẩm</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-7">
+                @if (!string.IsNullOrEmpty(Model.sImage))
+                {
+                    <div class="single_product_pics">
+                        <div class="row">
+                            <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+                                <div class="single_product_thumbnails">
+                                    <ul>
+                                        @for (int i = 0; i < 3; i++)
+                                        {
+                                            <li><img class="img-secondary" src="@Url.Content(Model.sImage)" alt="" data-image="@Model.sImage"></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 image_col order-lg-2 order-1">
+                                <div class="single_product_image">
+                                    <div class="single_product_image_background" style="border-radius: 2px; background-image: url(@Url.Content(Model.sImage));"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @* Calculate old price and initialize quantity *@
+            @{
+                double oldPrice = (Model.fPrice ?? 0) + 50000;
+                int quantity = 1;
+            }
+
+            <div class="col-lg-5">
+                <div class="product_details">
+                    <input type="hidden" name="product_id" value="@Model.PK_iProductID" />
+                    <div class="product_details_title">
+                        <h2>@Model.sProductName</h2>
+                        <p>@Model.sDescribe</p>
+                    </div>
+                    <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
+                        <span class="ti-truck"></span><span>Miễn phí vận chuyển</span>
+                    </div>
+                    <div class="original_price">@oldPrice</div>
+                    <div style="display: flex;flex-direction: row">
+                        <div class="product_price">@Model.fPrice</div>
+                        <ul class="star_rating" style="margin-top: 4px">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <li>
+                                    <i class="fa @((i <= (Model.tblReviews?.FirstOrDefault()?.iStarRating ?? 0)) ? "fa-star" : "fa-star-o")" aria-hidden="true" onclick="setRating(@i)"></i>
+                                </li>
+                            }
+                        </ul>
+                        <input type="hidden" id="iStarRating" name="iStarRating" value="@Model.tblReviews?.FirstOrDefault()?.iStarRating" />
+
+                        <form id="reviewForm" method="post" action="@Url.Action("AddReview", "Review")">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="FK_iProductID" value="@Model.PK_iProductID" />
+                            <input type="hidden" id="reviewStarRating" name="iStarRating" value="@Model.tblReviews?.FirstOrDefault()?.iStarRating" />
+                            <button type="submit" class="btn btn-primary ml-4 mt-2">Đánh giá</button>
+                        </form>
+                    </div>
+                    @if (Model.iQuantity > 0)
+                    {
+                        using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                        {
+                            <div class="product_color">
+                                <span>Màu sắc:</span>
+                                <ul>
+                                    <li style="background: @Model.sColor"></li>
+                                </ul>
+                            </div>
+                            <div class="quantity">
+                                <div class="d-flex">
+                                    <span>Số lượng:</span>
+                                    <div class="quantity_selector mb-3">
+                                        <span class="minus" onclick="decreaseQuantity()"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                        <input type="number" style="width:50px;" name="quantity" id="quantity_value" value="1" min="1" max="@Model.iQuantity" />
+                                        <span class="plus" onclick="increaseQuantity()"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                    </div>
+                                    <p class="ml-3">@Model.iQuantity sản phẩm có sẵn</p>
+                                    <input type="hidden" name="productId" value="@Model.PK_iProductID" />
+                                </div>
+                                <input class="red_button add_to_cart_button show-add-cart m-0" type="submit" name="submit" value="Thêm vào giỏ" />
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-danger">This product is out of stock.</p>
+                    }
+
+                    <script>
+                        function increaseQuantity() {
+                            const quantityInput = document.getElementById("quantity_value");
+                            let quantity = parseInt(quantityInput.value);
+                            const maxQuantity = parseInt(quantityInput.max);
+                            if (quantity < maxQuantity) {
+                                quantity++;
+                                quantityInput.value = quantity;
+                            }
+                        }
+
+                        function decreaseQuantity() {
+                            const quantityInput = document.getElementById("quantity_value");
+                            let quantity = parseInt(quantityInput.value);
+                            if (quantity > 1) {
+                                quantity--;
+                                quantityInput.value = quantity;
+                            }
+                        }
+
+                        function setRating(rating) {
+                            document.getElementById("iStarRating").value = rating;
+                            document.getElementById("reviewStarRating").value = rating;
+                            var stars = document.querySelectorAll(".star_rating i");
+                            stars.forEach((star, index) => {
+                                star.className = index < rating ? "fa fa-star" : "fa fa-star-o";
+                            });
+                        }
+
+                        document.getElementById("reviewForm").addEventListener("submit", function (event) {
+                            event.preventDefault();
+                            var form = this;
+                            var formData = new FormData(form);
+
+                            fetch(form.action, {
+                                method: form.method,
+                                body: formData,
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                }
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        alert("Đánh giá của bạn đã được gửi thành công!");
+                                    } else {
+                                        alert("Có lỗi xảy ra. Vui lòng thử lại.");
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error("Error:", error);
+                                    alert("Có lỗi xảy ra. Vui lòng thử lại.");
+                                });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script src="~/Content/assets/js/single_custom.js"></script>
+}

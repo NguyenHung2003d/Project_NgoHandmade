@@ -1,0 +1,73 @@
+﻿@model giadinhthoxinh.Models.tblCategory
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+}
+
+<section class="content-header p-2">
+</section>
+
+<section class="content ml-2 mr-2">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title text-lg text-danger">Thông tin thêm mới danh mục</h3>
+        </div>
+
+        <div class="card-body">
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="alert alert-success">@ViewBag.Message</div>
+            }
+            @if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <div class="alert alert-danger">@ViewBag.Error</div>
+            }
+            <div class="bs-stepper-content">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="FK_iSupplierID">Chọn cửa hàng</label>
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.FK_iSupplierID, new SelectList(ViewBag.Suppliers, "Value", "Text"), "Chọn cửa hàng", new { @class = "form-control", @style = "height: 32.4px" })
+                                @Html.ValidationMessageFor(model => model.FK_iSupplierID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="sCategoryName">Tên danh mục</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.sCategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.sCategoryName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary btn-secondary" })
+                                <input type="submit" value="Thêm" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="card-body">
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </div>
+</section>
