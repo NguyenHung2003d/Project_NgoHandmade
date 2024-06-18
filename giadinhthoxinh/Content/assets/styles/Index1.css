@@ -1,6 +1,10 @@
 ﻿.body-cart {
     padding-top: 70px ;
 }
+body, input, button {
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
 :root {
     --color-main: #ffd74b !important;
     --bg-content-main: #8fc4b7 !important; /*#fff7ff */
@@ -35,16 +39,6 @@
     /*margin-left: 80%;*/
     border: 1px solid #0060ff;
 }
-
-.under-footer {
-    /*    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding-bottom:0;*/
-    margin-bott /*om: 10px;
-    margin-top: 100px;*/
-}
-
 .test_css {
     color: red !important;
 }
