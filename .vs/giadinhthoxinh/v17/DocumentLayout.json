@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -55,32 +46,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "giadinhthoxinh\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\UserController.cs",
-              "RelativeToolTip": "giadinhthoxinh\\Controllers\\UserController.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAIwDAAAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-21T07:04:56.293Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Login.cshtml",
-              "RelativeDocumentMoniker": "giadinhthoxinh\\Views\\User\\Login.cshtml",
-              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Login.cshtml",
-              "RelativeToolTip": "giadinhthoxinh\\Views\\User\\Login.cshtml",
-              "ViewState": "AQIAACAAAAAAAAAAAAAuwDYAAABfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-21T06:26:28.69Z",
-              "EditorCaption": ""
             }
           ]
         },

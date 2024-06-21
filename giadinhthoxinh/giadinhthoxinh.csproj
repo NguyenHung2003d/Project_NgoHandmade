@@ -264,6 +264,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Content\assets\images\khan_len\khăn_5_1.jpg" />
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
@@ -360,7 +361,6 @@
     <Content Include="Content\assets\images\khan_len\khan_7_3.png" />
     <Content Include="Content\assets\images\khan_len\khan_7_4.png" />
     <Content Include="Content\assets\images\khan_len\khan_7_5.png" />
-    <Content Include="Content\assets\images\khan_len\khăn_5_1.jpg" />
     <Content Include="Content\assets\images\logo.jpg" />
     <Content Include="Content\assets\images\logo\logo handmade.jpg" />
     <Content Include="Content\assets\images\logo\logo-login.jpg" />
@@ -2401,7 +2401,6 @@
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
