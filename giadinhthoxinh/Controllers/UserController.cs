@@ -36,36 +36,38 @@ namespace giadinhthoxinh.Controllers
             if (string.IsNullOrEmpty(sPass)) {
                 ModelState.AddModelError("sPass", "Vui lòng nhập mật khẩu.");
             }
+            if (ModelState.IsValid) {
+                var f_password = GetMD5(sPass);
+                var user = db.tblUsers.FirstOrDefault(s => s.sEmail.Equals(sEmail) && s.sPass.Equals(f_password));
 
-            var f_password = GetMD5(sPass);
-            var user = db.tblUsers.FirstOrDefault(s => s.sEmail.Equals(sEmail) && s.sPass.Equals(f_password));
+                if (user != null && user.iState != 0) {
+                    var supplier = db.tblSuppliers.FirstOrDefault(s => s.FK_iAccountID == user.PK_iAccountID);
+                    var permission = db.tblPermissions.FirstOrDefault(s => s.PK_iPermissionID == user.FK_iPermissionID);
+                    Session["User"] = user;
+                    Session["idUser"] = user.PK_iAccountID;
+                    Session["userName"] = user.sUserName;
+                    Session["Email"] = user.sEmail;
+                    Session["UserRole"] = permission.sPermissionName;
 
-            if (user != null && user.iState != 0) {
-                var supplier = db.tblSuppliers.FirstOrDefault(s => s.FK_iAccountID == user.PK_iAccountID);
-                var permission = db.tblPermissions.FirstOrDefault(s => s.PK_iPermissionID == user.FK_iPermissionID);
-                Session["User"] = user;
-                Session["idUser"] = user.PK_iAccountID;
-                Session["userName"] = user.sUserName;
-                Session["Email"] = user.sEmail;
-                Session["UserRole"] = permission.sPermissionName;
-
-                if (user.FK_iPermissionID == 2) {
-                    Session["Nhanvien"] = user;
-                    if (supplier == null) {
-                        return RedirectToAction("Create", "Suppliers", new { area = "Seller" });
+                    if (user.FK_iPermissionID == 2) {
+                        Session["Nhanvien"] = user;
+                        if (supplier == null) {
+                            return RedirectToAction("Create", "Suppliers", new { area = "Seller" });
+                        }
+                        return RedirectToAction("Index", "Home", new { area = "Seller" });
+                    } else if (user.FK_iPermissionID == 3) {
+                        Session["Nhanvien"] = user;
+                        Session["QuanLy"] = user;
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    } else {
+                        return RedirectToAction("Index", "Home");
                     }
-                    return RedirectToAction("Index", "Home", new { area = "Seller" });
-                } else if (user.FK_iPermissionID == 3) {
-                    Session["Nhanvien"] = user;
-                    Session["QuanLy"] = user;
-                    return RedirectToAction("Index", "Home", new { area = "Admin" });
                 } else {
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError("", "Email hoặc mật khẩu không đúng.");
+                    
                 }
-            } else {
-                ViewBag.Error = "Đăng nhập thất bại!";
-                return View("Login");
             }
+            return View();
         }
 
 

@@ -40,9 +40,11 @@
                                     TempData.Remove("SuccessMessage");
                                 }
 
-                                @if (!string.IsNullOrEmpty(ViewBag.LoginError)) {
+                                @if (!ViewData.ModelState.IsValid) {
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <strong>@ViewBag.LoginError</strong>
+                                        @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors)) {
+                                            <strong>@modelError.ErrorMessage</strong>
+                                        }
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -137,12 +139,31 @@
         document.getElementById("login-section").style.display = "none";
         document.getElementById("forgot-password-section").style.display = "";
         document.getElementById("google-login-section").style.display = "none";
+        document.querySelector(".card-body h2").textContent = "Quên mật khẩu";
     });
 
     document.getElementById("back-to-login-link").addEventListener("click", function (e) {
         e.preventDefault();
         document.getElementById("login-section").style.display = "";
         document.getElementById("forgot-password-section").style.display = "none";
+        document.getElementById("verification-code-section").style.display = "none";
+        document.getElementById("new-password-section").style.display = "none";
         document.getElementById("google-login-section").style.display = "";
+        document.querySelector(".card-body h2").textContent = "Đăng nhập";
     });
+
+    // Ẩn nút Google Login và đổi tiêu đề khi ở verification-code-section hoặc new-password-section
+    function checkAndHideGoogleLogin() {
+        if (document.getElementById("verification-code-section").style.display != "none" || document.getElementById("new-password-section").style.display != "none") {
+            document.getElementById("googleLoginForm").style.display = "none";
+            var titleElement = document.querySelector(".card-body h2");
+            if (titleElement) {
+                titleElement.textContent = "Quên mật khẩu";
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", checkAndHideGoogleLogin); // Kiểm tra khi trang được tải
+    window.addEventListener("hashchange", checkAndHideGoogleLogin); // Kiểm tra khi người dùng thay đổi hash
 </script>
+
