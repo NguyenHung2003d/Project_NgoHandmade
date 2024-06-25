@@ -119,11 +119,13 @@
                                 <div id="google-login-section" style="@(ViewBag.ShowForgotPasswordSection == true || ViewBag.ShowVerificationCodeSection == true || ViewBag.ShowNewPasswordSection == true ? "display: none;" : "")">
                                     @using (Html.BeginForm("ExternalLogin", "User", new { provider = "Google", returnUrl = "/" }, FormMethod.Post, new { id = "googleLoginForm" })) {
                                         <div class="form-group d-flex justify-content-center">
-                                            <input type="submit" value="Đăng nhập bằng Google" class="btn btn-danger btn-lg" />
+                                            <button type="submit" class="btn btn-lg google-login-button">
+                                                <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="Google Icon" style="width: 24px; height: 24px; margin-right: 5px;" />
+                                                Đăng nhập bằng Google
+                                            </button>
                                         </div>
                                     }
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -152,7 +154,6 @@
         document.querySelector(".card-body h2").textContent = "Đăng nhập";
     });
 
-    // Ẩn nút Google Login và đổi tiêu đề khi ở verification-code-section hoặc new-password-section
     function checkAndHideGoogleLogin() {
         if (document.getElementById("verification-code-section").style.display != "none" || document.getElementById("new-password-section").style.display != "none") {
             document.getElementById("googleLoginForm").style.display = "none";
@@ -163,7 +164,7 @@
         }
     }
 
-    document.addEventListener("DOMContentLoaded", checkAndHideGoogleLogin); // Kiểm tra khi trang được tải
-    window.addEventListener("hashchange", checkAndHideGoogleLogin); // Kiểm tra khi người dùng thay đổi hash
+    document.addEventListener("DOMContentLoaded", checkAndHideGoogleLogin); 
+    window.addEventListener("hashchange", checkAndHideGoogleLogin);
 </script>
 

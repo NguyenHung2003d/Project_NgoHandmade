@@ -242,7 +242,7 @@ namespace giadinhthoxinh.Controllers
             vnpay.AddRequestData("vnp_ReturnUrl", Url.Action("VNPayReturn", "Cart", null, Request.Url.Scheme));
             vnpay.AddRequestData("vnp_TxnRef", DateTime.Now.Ticks.ToString());
 
-            string paymentUrl = vnpay.CreateRequestUrl("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html", "WRKLTEFQWOEDJZNTKZPDE2A9853KWI8S");
+            string paymentUrl = vnpay.CreateRequestUrl("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html", "FH9F2MY20V6O8BEWWISJXCU4CTR9CWHC");
             return paymentUrl;
         }
 
@@ -259,7 +259,7 @@ namespace giadinhthoxinh.Controllers
             string vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
             string vnp_SecureHash = Request.QueryString["vnp_SecureHash"];
 
-            bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, "WRKLTEFQWOEDJZNTKZPDE2A9853KWI8S");
+            bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, "FH9F2MY20V6O8BEWWISJXCU4CTR9CWHC");
 
             if (checkSignature)
             {
@@ -275,7 +275,7 @@ namespace giadinhthoxinh.Controllers
                     ddh.sCustomerPhone = (string)Session["sCustomerPhone"];
                     ddh.iDeliveryMethod = 0;
                     ddh.iPaid = 1;
-                    ddh.iTotal = (int)Session["TongTien"];
+                    ddh.iTotal = 500000;
                     ddh.dInvoidDate = DateTime.Now;
                     ddh.fSurcharge = float.Parse(TongTien().ToString());
                     ddh.sState = "Đã thanh toán";

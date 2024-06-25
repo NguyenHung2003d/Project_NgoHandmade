@@ -5,12 +5,24 @@ body, input, button {
     font-family: 'Roboto', Arial, sans-serif;
 }
 
+.col-md-offset-2.col-md-10 { 
+    margin-left: 0; 
+}
+
+.checkbox label {
+    margin-left: -10px; /* Điều chỉnh giá trị theo ý muốn */
+}
+
 :root {
     --color-main: #ffd74b !important;
-    --bg-content-main: #8fc4b7 !important; /*#fff7ff */
+    --bg-content-main: #8fc4b7 !important; 
     --color-text: #ffd74b !important;
     --color-name: #ff04af !important;
     --font-main: 14px !important;
+}
+.required-field::after {
+    content: " *";
+    color: red;
 }
 
 .color-main {

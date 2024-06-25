@@ -20,10 +20,6 @@
     <div class="card">
         <div class="card-header">
             <h1 class="card-title text-lg text-danger">Danh sách thông tin tài khoản</h1>
-
-            @*<div class="card-tools">
-                @Html.ActionLink("thêm mới", "Create", null, new { @class = "btn btn-primary" })
-            </div>*@
         </div>
 
         <div class="card-body table-responsive text-nowrap">
@@ -75,8 +71,6 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Sửa", "Edit", new { id = item.PK_iAccountID }, new { @class = "btn btn-primary btn-warning" }) 
-                                @*@Html.ActionLink("Chi tiết", "Details", new { id = item.PK_iAccountID }, new { @class = "btn btn-primary btn-info" })*@
-                                @*@Html.ActionLink("xóa", "Delete", new { id = item.PK_iAccountID }, new { @class = "btn btn-primary btn-danger" })*@
                             </td>
                         </tr>
                     }

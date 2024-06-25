@@ -201,8 +201,8 @@ namespace giadinhthoxinh.Controllers
 
         private void SendEmail(string toEmail, string subject, string body)
         {
-            var fromEmail = "ducpd82@gmail.com";
-            var fromPassword = "gsba ghgr ajkr owwg";
+            var fromEmail = "hn989422@gmail.com";
+            var fromPassword = "obxq ynbn mwyv dogi";
 
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {

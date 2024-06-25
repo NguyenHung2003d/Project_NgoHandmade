@@ -33,7 +33,11 @@ namespace giadinhthoxinh.Models
         public string sPhone { get; set; }
         public string sAddress { get; set; }
         public Nullable<int> iState { get; set; }
-    
+
+        [Display(Name = "Tôi đồng ý với các Điều khoản và chính xác của Ngõ Handmade")]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Bạn phải đồng ý với các Điều khoản và Điều kiện để đăng ký.")]
+        public bool TermsAccepted { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblImportOrder> tblImportOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

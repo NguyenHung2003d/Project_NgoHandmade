@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\content\\assets\\styles\\index1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\content\\assets\\styles\\index1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\views\\user\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\views\\user\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\models\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\models\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,6 +63,58 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Login.cshtml",
+              "RelativeDocumentMoniker": "giadinhthoxinh\\Views\\User\\Login.cshtml",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Login.cshtml",
+              "RelativeToolTip": "giadinhthoxinh\\Views\\User\\Login.cshtml",
+              "ViewState": "AQIAAGIAAAAAAAAAAAAuwHEAAABqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-25T07:23:45.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "tblUser.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Models\\tblUser.cs",
+              "RelativeDocumentMoniker": "giadinhthoxinh\\Models\\tblUser.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Models\\tblUser.cs",
+              "RelativeToolTip": "giadinhthoxinh\\Models\\tblUser.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwCYAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-25T07:17:23.839Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index1.css",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Content\\assets\\styles\\Index1.css",
+              "RelativeDocumentMoniker": "giadinhthoxinh\\Content\\assets\\styles\\Index1.css",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Content\\assets\\styles\\Index1.css",
+              "RelativeToolTip": "giadinhthoxinh\\Content\\assets\\styles\\Index1.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-06-25T07:07:05.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Register.cshtml",
+              "RelativeDocumentMoniker": "giadinhthoxinh\\Views\\User\\Register.cshtml",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Register.cshtml",
+              "RelativeToolTip": "giadinhthoxinh\\Views\\User\\Register.cshtml",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAuwFMAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-25T07:03:31.444Z",
+              "EditorCaption": ""
             }
           ]
         },
