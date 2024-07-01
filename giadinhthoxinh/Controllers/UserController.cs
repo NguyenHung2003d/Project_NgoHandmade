@@ -11,86 +11,67 @@ using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
-namespace giadinhthoxinh.Controllers
-{
-    public class UserController : Controller
-    {
+namespace giadinhthoxinh.Controllers {
+    public class UserController : Controller {
         giadinhthoxinhEntities db = new giadinhthoxinhEntities();
         // GET: User
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             return View();
         }
 
         //Login
-        public ActionResult Login()
-        {
+        public ActionResult Login() {
             return View();
         }
 
         [HttpPost]
         public ActionResult Login(string sEmail, string sPass) {
-            if (string.IsNullOrEmpty(sEmail)) {
-                ModelState.AddModelError("sEmail", "Vui lòng nhập email.");
-            }
-            if (string.IsNullOrEmpty(sPass)) {
-                ModelState.AddModelError("sPass", "Vui lòng nhập mật khẩu.");
-            }
-            if (ModelState.IsValid) {
-                var f_password = GetMD5(sPass);
-                var user = db.tblUsers.FirstOrDefault(s => s.sEmail.Equals(sEmail) && s.sPass.Equals(f_password));
+            var f_password = GetMD5(sPass);
+            var user = db.tblUsers.FirstOrDefault(s => s.sEmail.Equals(sEmail) && s.sPass.Equals(f_password));
 
-                if (user != null && user.iState != 0) {
-                    var supplier = db.tblSuppliers.FirstOrDefault(s => s.FK_iAccountID == user.PK_iAccountID);
-                    var permission = db.tblPermissions.FirstOrDefault(s => s.PK_iPermissionID == user.FK_iPermissionID);
-                    Session["User"] = user;
-                    Session["idUser"] = user.PK_iAccountID;
-                    Session["userName"] = user.sUserName;
-                    Session["Email"] = user.sEmail;
-                    Session["UserRole"] = permission.sPermissionName;
+            if (user != null && user.iState != 0) {
+                var supplier = db.tblSuppliers.FirstOrDefault(s => s.FK_iAccountID == user.PK_iAccountID);
+                var permission = db.tblPermissions.FirstOrDefault(s => s.PK_iPermissionID == user.FK_iPermissionID);
+                Session["User"] = user;
+                Session["idUser"] = user.PK_iAccountID;
+                Session["userName"] = user.sUserName;
+                Session["Email"] = user.sEmail;
+                Session["UserRole"] = permission.sPermissionName;
 
-                    if (user.FK_iPermissionID == 2) {
-                        Session["Nhanvien"] = user;
-                        if (supplier == null) {
-                            return RedirectToAction("Create", "Suppliers", new { area = "Seller" });
-                        }
-                        return RedirectToAction("Index", "Home", new { area = "Seller" });
-                    } else if (user.FK_iPermissionID == 3) {
-                        Session["Nhanvien"] = user;
-                        Session["QuanLy"] = user;
-                        return RedirectToAction("Index", "Home", new { area = "Admin" });
-                    } else {
-                        return RedirectToAction("Index", "Home");
+                if (user.FK_iPermissionID == 2) {
+                    Session["Nhanvien"] = user;
+                    if (supplier == null) {
+                        return RedirectToAction("Create", "Suppliers", new { area = "Seller" });
                     }
+                    return RedirectToAction("Index", "Home", new { area = "Seller" });
+                } else if (user.FK_iPermissionID == 3) {
+                    Session["Nhanvien"] = user;
+                    Session["QuanLy"] = user;
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
                 } else {
-                    ModelState.AddModelError("", "Email hoặc mật khẩu không đúng.");
-                    
+                    return RedirectToAction("Index", "Home");
                 }
+            } else {
+                ViewBag.error = "Login failed";
+                return View("Login");
             }
-            return View();
         }
 
-
         [HttpPost]
-        public ActionResult ExternalLogin(string provider)
-        {
+        public ActionResult ExternalLogin(string provider) {
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "User"));
         }
 
-        public ActionResult ExternalLoginCallback()
-        {
+        public ActionResult ExternalLoginCallback() {
             var loginInfo = HttpContext.GetOwinContext().Authentication.GetExternalLoginInfo();
-            if (loginInfo == null)
-            {
+            if (loginInfo == null) {
                 return RedirectToAction("Login");
             }
 
             var user = db.tblUsers.FirstOrDefault(u => u.sEmail == loginInfo.Email);
-            if (user == null)
-            {
+            if (user == null) {
                 string password = "123";
-                user = new tblUser
-                {
+                user = new tblUser {
                     sEmail = loginInfo.Email,
                     sUserName = loginInfo.DefaultUserName,
                     sPass = GetMD5(password),
@@ -109,10 +90,8 @@ namespace giadinhthoxinh.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private class ChallengeResult : HttpUnauthorizedResult
-        {
-            public ChallengeResult(string provider, string redirectUri)
-            {
+        private class ChallengeResult : HttpUnauthorizedResult {
+            public ChallengeResult(string provider, string redirectUri) {
                 LoginProvider = provider;
                 RedirectUri = redirectUri;
             }
@@ -120,19 +99,16 @@ namespace giadinhthoxinh.Controllers
             public string LoginProvider { get; set; }
             public string RedirectUri { get; set; }
 
-            public override void ExecuteResult(ControllerContext context)
-            {
+            public override void ExecuteResult(ControllerContext context) {
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
 
         [HttpPost]
-        public ActionResult SendVerificationCode(string email)
-        {
+        public ActionResult SendVerificationCode(string email) {
             var user = db.tblUsers.FirstOrDefault(u => u.sEmail == email);
-            if (user != null)
-            {
+            if (user != null) {
                 // Generate a verification code
                 var verificationCode = new Random().Next(100000, 999999).ToString();
                 Session["VerificationCode"] = verificationCode;
@@ -144,9 +120,7 @@ namespace giadinhthoxinh.Controllers
                 ViewBag.Message = "Verification code sent to your email.";
                 ViewBag.ShowVerificationCodeSection = true;
                 return View("Login");
-            }
-            else
-            {
+            } else {
                 ViewBag.Error = "Email not found.";
                 ViewBag.ShowForgotPasswordSection = true;
                 return View("Login");
@@ -154,16 +128,12 @@ namespace giadinhthoxinh.Controllers
         }
 
         [HttpPost]
-        public ActionResult VerifyCode(string verificationCode)
-        {
-            if (Session["VerificationCode"] != null && Session["VerificationCode"].ToString() == verificationCode)
-            {
+        public ActionResult VerifyCode(string verificationCode) {
+            if (Session["VerificationCode"] != null && Session["VerificationCode"].ToString() == verificationCode) {
                 ViewBag.Message = "Verification code is correct.";
                 ViewBag.ShowNewPasswordSection = true;
                 return View("Login");
-            }
-            else
-            {
+            } else {
                 ViewBag.Error = "Invalid verification code.";
                 ViewBag.ShowVerificationCodeSection = true;
                 return View("Login");
@@ -171,48 +141,38 @@ namespace giadinhthoxinh.Controllers
         }
 
         [HttpPost]
-        public ActionResult ResetPassword(string newPassword)
-        {
-            if (Session["ResetEmail"] != null)
-            {
+        public ActionResult ResetPassword(string newPassword) {
+            if (Session["ResetEmail"] != null) {
                 var email = Session["ResetEmail"].ToString();
                 var user = db.tblUsers.FirstOrDefault(u => u.sEmail == email);
-                if (user != null)
-                {
+                if (user != null) {
                     user.sPass = GetMD5(newPassword);
                     db.SaveChanges();
 
-                    ViewBag.Message = "Password reset successfully.";
+                    ViewBag.Message = "Đổi mật khẩu thành công.";
                     return View("Login");
-                }
-                else
-                {
-                    ViewBag.Error = "User not found.";
+                } else {
+                    ViewBag.Error = "Người dùng không tìm thấy.";
                     ViewBag.ShowNewPasswordSection = true;
                     return View("Login");
                 }
-            }
-            else
-            {
+            } else {
                 ViewBag.Error = "Session expired. Please try again.";
                 return View("Login");
             }
         }
 
-        private void SendEmail(string toEmail, string subject, string body)
-        {
+        private void SendEmail(string toEmail, string subject, string body) {
             var fromEmail = "hn989422@gmail.com";
-            var fromPassword = "obxq ynbn mwyv dogi";
+            var fromPassword = "fpwy fsvw aglm azox";
 
-            var smtpClient = new SmtpClient("smtp.gmail.com")
-            {
+            var smtpClient = new SmtpClient("smtp.gmail.com") {
                 Port = 587,
                 Credentials = new NetworkCredential(fromEmail, fromPassword),
                 EnableSsl = true,
             };
 
-            var mailMessage = new MailMessage
-            {
+            var mailMessage = new MailMessage {
                 From = new MailAddress(fromEmail),
                 Subject = subject,
                 Body = body,
@@ -223,11 +183,9 @@ namespace giadinhthoxinh.Controllers
             smtpClient.Send(mailMessage);
         }
 
-        public ActionResult AccountPartial()
-        {
-            
-            if (Session["User"]!=null)
-            {
+        public ActionResult AccountPartial() {
+
+            if (Session["User"] != null) {
 
                 var kh = (tblUser)Session["User"];
                 var thongtinkhachhang = db.tblUsers.Find(kh.PK_iAccountID);
@@ -238,199 +196,141 @@ namespace giadinhthoxinh.Controllers
             return PartialView();
         }
         //Register    
-        public ActionResult Register()
-        {
+        public ActionResult Register() {
             ViewBag.FK_iPermissionID = new SelectList(db.tblPermissions, "PK_iPermissionID", "sPermissionName");
             return View();
         }
 
-        //public ActionResult Register1()
-        //{
-        //    return View();
-        //}
-
         //POST: Register
         [HttpPost]
         public ActionResult Register(tblUser _user) {
-            // Kiểm tra nếu bất kỳ trường nào bị bỏ trống
-            if (string.IsNullOrEmpty(_user.sEmail)) {
-                ModelState.AddModelError("sEmail", "Vui lòng nhập email.");
-            }
-            if (string.IsNullOrEmpty(_user.sUserName)) {
-                ModelState.AddModelError("sUserName", "Vui lòng nhập tên người dùng.");
-            }
-            if (string.IsNullOrEmpty(_user.sPass)) {
-                ModelState.AddModelError("sPass", "Vui lòng nhập mật khẩu.");
-            }
-
-            // Nếu ModelState không hợp lệ, trả về lại view với thông báo lỗi
-            if (!ModelState.IsValid) {
-                return View(_user);
-            }
-
-            var checkEmail = db.tblUsers.FirstOrDefault(s => s.sEmail == _user.sEmail);
-            var checkUsername = db.tblUsers.FirstOrDefault(s => s.sUserName == _user.sUserName);
-
-            if (checkEmail != null || checkUsername != null) {
-                if (checkEmail != null) {
-                    ModelState.AddModelError("sEmail", "Email này đã tồn tại!");
+            if (ModelState.IsValid) {
+                if (string.IsNullOrEmpty(_user.sUserName) || string.IsNullOrEmpty(_user.sEmail) || string.IsNullOrEmpty(_user.sPass)) {
+                    ViewBag.error = "All fields are required.";
+                    ViewBag.FK_iPermissionID = new SelectList(db.tblPermissions, "PK_iPermissionID", "sPermissionName");
+                    return View();
                 }
-                if (checkUsername != null) {
-                    ModelState.AddModelError("sUserName", "Tên người dùng này đã tồn tại!");
+
+                var check = db.tblUsers.FirstOrDefault(s => s.sEmail == _user.sEmail);
+                if (check == null) {
+                    _user.sPass = GetMD5(_user.sPass);
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.tblUsers.Add(_user);
+                    db.SaveChanges();
+                    return RedirectToAction("index", "home");
+                } else {
+                    ViewBag.error = "Email này đã tồn tại";
+                    ViewBag.FK_iPermissionID = new SelectList(db.tblPermissions, "PK_iPermissionID", "sPermissionName");
+                    return View();
                 }
-                if (_user.sPass.Length < 6) {
-                    ModelState.AddModelError("sPass", "Mật khẩu phải có ít nhất 6 ký tự.");
-                    return View(_user);
-                }
-                if (_user.sPass.Length < 6) {
-                    ModelState.AddModelError("sPass", "Mật khẩu phải có ít nhất 6 ký tự.");
-                    return View(_user);
-                }
-                return View(_user); // Trả về lại view với các lỗi đã được thêm vào ModelState
             }
-
-            // Nếu không có trùng lặp, tiếp tục đăng ký
-            _user.sPass = GetMD5(_user.sPass);
-            db.Configuration.ValidateOnSaveEnabled = false;
-            db.tblUsers.Add(_user);
-            db.SaveChanges();
-
-            TempData["SuccessMessage"] = "Đăng ký thành công!";
-            return RedirectToAction("Login", "User");
+            ViewBag.FK_iPermissionID = new SelectList(db.tblPermissions, "PK_iPermissionID", "sPermissionName");
+            return View();
         }
 
+
         //create a string MD5
-        public static string GetMD5(string str)
-        {
+        public static string GetMD5(string str) {
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] fromData = Encoding.UTF8.GetBytes(str);
             byte[] targetData = md5.ComputeHash(fromData);
             string byte2String = null;
 
-            for (int i = 0; i < targetData.Length; i++)
-            {
+            for (int i = 0; i < targetData.Length; i++) {
                 byte2String += targetData[i].ToString("x2");
 
             }
             return byte2String;
         }
 
-        public ActionResult Permission()
-        {
+        public ActionResult Permission() {
             return View();
         }
-        public ActionResult Edit()
-        {
-           
-            if (Session["User"] != null)
-            {
+        public ActionResult Edit() {
+
+            if (Session["User"] != null) {
                 var nguoidung = (tblUser)Session["User"];
                 var nguoidung_sua = db.tblUsers.Find(nguoidung.PK_iAccountID);
                 return View(nguoidung_sua);
-            }
-            else
-            {
+            } else {
                 return RedirectToAction("Login", "User");
             }
-                
-           
+
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(tblUser _user)
-        {
-            if (ModelState.IsValid)
-            {
+        public ActionResult Edit(tblUser _user) {
+            if (ModelState.IsValid) {
                 var olddata = db.tblUsers.FirstOrDefault(s => s.PK_iAccountID == _user.PK_iAccountID);
-                if (olddata != null)
-                {
+                if (olddata != null) {
                     olddata.sUserName = _user.sUserName;
                     olddata.sEmail = _user.sEmail;
                     olddata.sPhone = _user.sPhone;
                     olddata.sAddress = _user.sAddress;
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
-                }
-                else
-                {
+                } else {
                     ViewBag.error = "Không tồn tại tài khoản";
                     return RedirectToAction("Login", "User"); ;
                 }
 
 
             }
-            //ViewBag.FK_iPermissionID = new SelectList(db.tblPermissions, "PK_iPermissionID", "sPermissionName", tblUser.FK_iPermissionID);
             return View();
         }
-        public ActionResult EditPassword()
-        {
+        public ActionResult EditPassword() {
 
-            if (Session["User"] != null)
-            {
-               
+            if (Session["User"] != null) {
+
                 return View();
-            }
-            else
-            {
+            } else {
                 return RedirectToAction("Login", "User");
             }
 
 
         }
         [HttpPost]
-        public ActionResult EditPassword(tblUser _user)
-        {
-            if (ModelState.IsValid)
-            {
+        public ActionResult EditPassword(tblUser _user) {
+            if (ModelState.IsValid) {
                 var nguoidung = (tblUser)Session["User"];
                 var nguoidung_sua = db.tblUsers.Find(nguoidung.PK_iAccountID);
 
-                if (nguoidung_sua != null)
-                {
+                if (nguoidung_sua != null) {
                     var input = nguoidung_sua.sPass;
                     var oldPasswordInput = Request.Form["oldpass"];
                     var newPasswordInput = Request.Form["newpass"];
                     var confirmPasswordInput = Request.Form["confirmpass"];
 
-                    if (string.IsNullOrEmpty(oldPasswordInput) || string.IsNullOrEmpty(newPasswordInput) || string.IsNullOrEmpty(confirmPasswordInput))
-                    {
+                    if (string.IsNullOrEmpty(oldPasswordInput) || string.IsNullOrEmpty(newPasswordInput) || string.IsNullOrEmpty(confirmPasswordInput)) {
                         ViewBag.error = "All fields are required.";
                         return View();
                     }
 
-                    if (newPasswordInput != confirmPasswordInput)
-                    {
-                        ViewBag.error = "New password and confirmation password do not match.";
+                    if (newPasswordInput != confirmPasswordInput) {
+                        ViewBag.error = "Mật khẩu không trùng khớp.";
                         return View();
                     }
 
                     var oldPasswordHash = GetMD5(oldPasswordInput);
 
-                    if (input == oldPasswordHash)
-                    {
+                    if (input == oldPasswordHash) {
                         nguoidung_sua.sPass = GetMD5(newPasswordInput);
                         db.SaveChanges();
-                        ViewBag.error = "Password changed successfully!";
+                        ViewBag.error = "Mật khẩu đã thay đổi thành công!";
+                    } else {
+                        ViewBag.error = "Mật khẩu cũ sai!";
                     }
-                    else
-                    {
-                        ViewBag.error = "Incorrect old password!";
-                    }
+                } else {
+                    ViewBag.error = "Người dùng không tồn tại!";
                 }
-                else
-                {
-                    ViewBag.error = "User not found!";
-                }
-            }
-            else
-            {
+            } else {
                 ViewBag.error = "Invalid model state!";
             }
 
             return View();
         }
-        public ActionResult Logout()
-        {
+        public ActionResult Logout() {
             Session.Clear();
             return RedirectToAction("index", "home");
 

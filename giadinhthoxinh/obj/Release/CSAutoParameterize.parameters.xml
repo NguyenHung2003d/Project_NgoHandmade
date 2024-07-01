@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="giadinhthoxinhEntities-Web.config Connection String" description="giadinhthoxinhEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Model1.csdl|res://*/Models.Model1.ssdl|res://*/Models.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-HI8M5QKD;initial catalog=giadinhthoxinh;user id=sa;password=123;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='giadinhthoxinhEntities']/@connectionString" />
+  </parameter>
+</parameters>

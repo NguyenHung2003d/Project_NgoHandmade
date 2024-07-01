@@ -48,8 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
+                    @foreach (var item in Model) {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.sEmail)
@@ -70,7 +69,7 @@
                                 @Html.DisplayFor(modelItem => item.tblPermission.sPermissionName)
                             </td>
                             <td>
-                                @Html.ActionLink("Sửa", "Edit", new { id = item.PK_iAccountID }, new { @class = "btn btn-primary btn-warning" }) 
+                                @Html.ActionLink("Sửa", "Edit", new { id = item.PK_iAccountID }, new { @class = "btn btn-primary btn-warning" })
                             </td>
                         </tr>
                     }

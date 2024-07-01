@@ -22,55 +22,54 @@
             <h3 class="text-danger text-lg ">Sửa thông tin nhà cung cấp</h3>
         </div>
         <div class="card-body">
-            @using (Html.BeginForm("", "", FormMethod.Post, new { @class="w-100" }))
-            {
+            @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "w-100" })) {
                 @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.PK_iSupplierID)
-                @Html.HiddenFor(model => model.FK_iAccountID)
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.PK_iSupplierID)
+                    @Html.HiddenFor(model => model.FK_iAccountID)
 
-                <div class="d-flex">
-                    <div class="form-group" style="width: 25%">
-                        <label class="control-label" for="sSupplierName">Tên cửa hàng</label>
+                    <div class="d-flex">
+                        <div class="form-group" style="width: 25%">
+                            <label class="control-label" for="sSupplierName">Tên cửa hàng</label>
                             @Html.EditorFor(model => model.sSupplierName, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.sSupplierName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mx-auto" style="width: 25%">
+                            <label class="control-label" for="sPhone">Số điện thoại</label>
+                            @Html.EditorFor(model => model.sPhone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.sPhone, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group" style="width: 40%">
+                            <label class="control-label" for="sEmail">Email</label>
+                            @Html.EditorFor(model => model.sEmail, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.sEmail, "", new { @class = "text-danger" })
+                        </div>
                     </div>
 
-                    <div class="form-group mx-auto" style="width: 25%">
-                        <label class="control-label" for="sPhone">Số điện thoại</label>
-                        @Html.EditorFor(model => model.sPhone, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.sPhone, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label" for="sAddress">Địa chỉ</label>
+                        @Html.EditorFor(model => model.sAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.sAddress, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-group" style="width: 40%">
-                        <label class="control-label" for="sEmail">Email</label>
-                        @Html.EditorFor(model => model.sEmail, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.sEmail, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="sAddress">Địa chỉ</label>
-                    @Html.EditorFor(model => model.sAddress, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.sAddress, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label ">Trạng thái:</label>
+                    <div class="form-group">
+                        <label class="control-label ">Trạng thái:</label>
                         <input type="radio" name="iState" value="" style="margin-left: 20px" />Bình thường
                         <input type="radio" name="iState" value="0" style="margin-left: 40px" />Vô hiệu hóa
                         @Html.ValidationMessageFor(model => model.iState, "", new { @class = "text-danger" })
-                </div>
+                    </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10 d-flex">
-                        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary btn-secondary mr-2" })
-                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10 d-flex">
+                            @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary btn-secondary mr-2" })
+                            <input type="submit" value="Lưu" class="btn btn-primary" />
+                        </div>
                     </div>
                 </div>
-            </div>
             }
 
         </div>

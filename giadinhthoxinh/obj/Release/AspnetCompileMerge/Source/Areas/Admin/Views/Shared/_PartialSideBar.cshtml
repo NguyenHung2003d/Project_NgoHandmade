@@ -1,0 +1,101 @@
+﻿
+<link href="~/Content/assets/styles/_PartialSideBar.css" rel="stylesheet" />
+<link href="~/Content/assets/styles/Index1.css" rel="stylesheet" />
+<!-- Sidebar -->
+<div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="~/Content/clients/dist/img/logo.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="/admin/users/index" class="d-block">Admin</a>
+        </div>
+    </div>
+
+    @*search*@
+    @*<div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn-sidebar">
+                    <i class="fas fa-search fa-fw"></i>
+                </button>
+            </div>
+        </div>
+    </div>*@
+
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+
+            <li class="nav-item">
+                <a href="/admin/users/index" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Quản lý tài khoản
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="/admin/suppliers/index" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Quản lý cửa hàng
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Thống kê báo cáo
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview space-nav-item">
+                    <li class="nav-item">
+                        <a href="@Url.Action("TKNhapHang","Report")" class="nav-link">
+                            <i class="fa fa-arrow-right"></i>
+                            <p>Báo cáo nhập hàng</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("TKBanHang","Report")" class="nav-link">
+                            <i class="fa fa-arrow-right"></i>
+                            <p>Báo cáo bán hàng</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("SanPhamBanChay","Report")" class="nav-link">
+                            <i class="fa fa-arrow-right"></i>
+                            <p>Sản phẩm bán chạy</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("TKLoaiSanPham","Report")" class="nav-link">
+                            <i class="fa fa-arrow-right"></i>
+                            <p>Số lượng sản phẩm</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="/home/index" class="nav-link color-name">
+                    <i class="fa fa-arrow-left color-text" aria-hidden="true"></i>
+                    <p class="color-text">
+                        Quay lại trang chủ
+                    </p>
+                </a>
+            </li>
+
+
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->

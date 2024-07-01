@@ -12,21 +12,29 @@ namespace giadinhthoxinh.Controllers
     {
         private giadinhthoxinhEntities db = new giadinhthoxinhEntities(); // Use private field
 
-        public ActionResult Index(int? categoryId, int? page)
-        {
+        public ActionResult Index(int? page, int? categoryId, string sortOrder = "asc") {
             int productInPage = 10;
             int pageNumber = (page ?? 1);
-            IQueryable<tblProduct> products;
+            ViewBag.SortOrder = sortOrder;
 
-            if (categoryId.HasValue)
-            {
-                products = db.tblProducts.Where(x => x.FK_iCategoryID == categoryId.Value&&x.iState!=0).OrderByDescending(x => x.PK_iProductID);
+            IQueryable<tblProduct> products = db.tblProducts.Where(x => x.iState != 0); // Start with products that are not deleted
+
+            if (categoryId.HasValue) {
+                products = products.Where(x => x.FK_iCategoryID == categoryId.Value);
                 ViewBag.CategoryId = categoryId.Value;
+            } else {
+                ViewBag.CategoryId = null; // No category selected
             }
-            else
-            {
-                products = db.tblProducts.Where(x=>x.iState!=0).OrderByDescending(x => x.PK_iProductID);
-                ViewBag.CategoryId = null;
+
+            // Apply sorting based on the selected order
+            switch (sortOrder) {
+                case "desc":
+                    products = products.OrderByDescending(p => p.fPrice);
+                    break;
+                case "asc": // Explicitly handle ascending
+                default:
+                    products = products.OrderBy(p => p.fPrice);
+                    break;
             }
 
             var categories = db.tblCategories.ToList();
@@ -34,6 +42,7 @@ namespace giadinhthoxinh.Controllers
 
             return View(products.ToPagedList(pageNumber, productInPage));
         }
+
 
         public ActionResult Search(string searchString, int? page) {
             Session["Search"] = searchString;
@@ -57,12 +66,26 @@ namespace giadinhthoxinh.Controllers
             return View();
         }
 
-        public ActionResult ProductDetail(int? id) {
-            if (id == null) {
-                return RedirectToAction("Index"); // Hoặc trả về trang lỗi tùy chỉnh
+        public ActionResult ProductDetail(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
             }
-            var item = db.tblProducts.Find(id);
-            return View(item);
+            var product = db.tblProducts.Find(id);
+
+            var userId = Session["idUser"];
+            bool hasOrdered = false;
+
+            if (userId != null)
+            {
+                hasOrdered = db.tblOrders.Any(o => o.FK_iAccountID == (int)userId && o.tblCheckoutDetails.Any(cd => cd.FK_iProductID == id));
+            }
+
+            ViewBag.HasOrdered = hasOrdered;
+            ViewBag.Reviews = db.tblReviews.Where(r => r.FK_iProductID == id).ToList();
+
+            return View(product);
         }
 
         public ActionResult Checkout()

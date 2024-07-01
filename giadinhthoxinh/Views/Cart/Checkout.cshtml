@@ -65,9 +65,11 @@
                                             <div>
                                                 <strong>Tổng tiền</strong>
                                                 <strong>
+                                                    @*<p class="mb-0">(bao gồm VAT)</p>*@
                                                 </strong>
                                             </div>
-                                            <span><strong>@ViewBag.TongTien</strong></span>
+                                            <span><strong id="totalAmount">@ViewBag.TongTien</strong></span>
+                                            <input type="hidden" name="totalAmount" id="totalAmountInput" />
                                         </li>
                                     </ul>
                                 </div>
@@ -78,10 +80,9 @@
                                             <input type="button" value="Quay về giỏ hàng" class="btn color-main progress-return" style="border: none" />
                                         </a>
                                     </p>
+
                                     <p>
-                                        <a href="#">
-                                            <input type="submit" value="Thanh toán" class="btn bg-primary progress-checkout" style="border: none" />
-                                        </a>
+                                        <input type="submit" value="Thanh toán" class="btn bg-primary progress-checkout" style="border: none" />
                                     </p>
                                 </div>
                             </div>
@@ -115,16 +116,17 @@
         });
     </script>
     <script>
-        const shopAddress = "@ViewBag.ShopAddress";
-        const apiKey = "tAlzaSyAsdfs99eFdg98XjtfWqrwqFUZ";
+        const shopAddress = "@ViewBag.ShopAddress"+",vietnam";
+        const apiKey = "AIzaSyByT9mVVPwUaK09lpsVjeFzY-pnYOf3tW0";
 
         document.getElementById("sDeliveryAddress").addEventListener("change", function () {
-            const customerAddress = this.value;
+            const customerAddress = this.value + ",vietnam";
+            console.log(shopAddress, customerAddress);
             calculateDistance(shopAddress, customerAddress);
         });
 
         function calculateDistance(origin, destination) {
-            const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(origin)}&destinations=${encodeURIComponent(destination)}&mode=driving&units=metric&key=${apiKey}`;
+            const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin}&destinations=${destination}&mode=driving&units=metric&key=${apiKey}`;
 
             fetch(url)
                 .then(response => response.json())
@@ -155,6 +157,9 @@
             }
 
             document.getElementById("shippingCost").innerText = `${shippingCost} VND`;
+            const totalAmount = parseFloat("@ViewBag.TongTien") + shippingCost;
+            document.getElementById("totalAmount").innerText = `${totalAmount} VND`;
+            document.getElementById("totalAmountInput").value = totalAmount;
         }
     </script>
 }

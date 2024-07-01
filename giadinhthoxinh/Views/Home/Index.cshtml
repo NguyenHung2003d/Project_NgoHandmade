@@ -2,13 +2,19 @@
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @using PagedList.Mvc
 @model PagedList.IPagedList<giadinhthoxinh.Models.tblProduct>
 
 <style>
-    .active {
-        background-color: #f0f0f0;
-        color: #000;
+    .new_arrivals_sorting {
+        display: flex; /* Enable Flexbox layout */
+        justify-content: space-between; /* Align items to opposite ends */
+        align-items: center; /* Vertically align items */
+    }
+
+    .price-sorting {
+        text-align: right; /* Align text within the dropdown to the right */
     }
 </style>
 
@@ -26,10 +32,8 @@
             <div class="col text-center">
                 <div class="new_arrivals_sorting">
                     <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-                        @if (ViewBag.Categories != null)
-                        {
-                            foreach (var category in (SelectList)ViewBag.Categories)
-                            {
+                        @if (ViewBag.Categories != null) {
+                            foreach (var category in (SelectList)ViewBag.Categories) {
                                 var isActive = ViewBag.CategoryId != null && ViewBag.CategoryId.ToString() == category.Value;
                                 <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center category-button @(isActive ? "active" : "")" data-category-id="@category.Value">
                                     @category.Text
@@ -37,6 +41,15 @@
                             }
                         }
                     </ul>
+                    <div class="price-sorting">
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Get)) {
+                            <label for="sortOrder">Sắp xếp theo giá:</label>
+                            <select id="sortOrder" name="sortOrder" onchange="this.form.submit()">
+                                <option value="asc" @(ViewBag.SortOrder == "asc" ? "selected" : "")>Thấp đến Cao</option>
+                                <option value="desc" @(ViewBag.SortOrder == "desc" ? "selected" : "")>Cao đến Thấp</option>
+                            </select>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,8 +57,7 @@
         <div class="row">
             <div class="col">
                 <div id="product-grid" class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-                    @foreach (var item in Model)
-                    {
+                    @foreach (var item in Model) {
                         <div class="product-item men">
                             <div class="product discount product_filter">
                                 <div class="product_image">
@@ -69,8 +81,6 @@
         </div>
     </div>
 </div>
-
-<!-- Pagination -->
 <div class="mt-4" id="pagination" style="text-align: center;">
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, categoryId = ViewBag.CategoryId }))
 </div>
@@ -89,8 +99,7 @@
             <div class="col">
                 <div class="product_slider_container">
                     <div class="owl-carousel owl-theme product_slider" style="overflow: hidden; height: 400px;">
-                        @foreach (var item in Model)
-                        {
+                        @foreach (var item in Model) {
                             <div class="owl-item product_slider_item">
                                 <div class="product-item women">
                                     <div class="product">

@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container about-page">
+    <div class="jumbotron text-center">
+        <h1>Ngõ Handmade</h1>
+        <img src="~/Content/assets/images/logo/logo handmade.jpg" class="img-fluid" />
+        <p class="lead">@ViewBag.Message</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Our Mission</h2>
+            <p>Kết nối người mua với những câu chuyện đằng sau mỗi sản phẩm thủ công, tạo ra những trải nghiệm mua sắm ý nghĩa</p>
+            <p>Tạo râ một cộng đồng lành mạnh,t sáng tạo và tôn trọng giá trị sản phẩm thủ công</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Our Vision</h2>
+            <p>Xây dựng nên điểm đến tin cậy số 1 của cộng đồng yêu thích sản phẩm handmade tại Việt Nam</p>
+            <p>Đưa sản phẩm thủ công Việt lên tầm quốc tế</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Our Values</h2>
+            <ul>
+                <li>Trung thực</li>
+                <li>Đổi mới</li>
+                <li>Xuất sắc</li>
+                <li>Hài lòng</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .about-page {
+        padding: 40px 0;
+    }
+
+    .jumbotron {
+        background-color: #f8f9fa;
+        padding: 30px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        text-align: center
+    }
+
+    .lead {
+        padding-top: 30px
+    }
+
+    .jumbotron h1 {
+        font-size: 3em;
+    }
+
+    .jumbotron p {
+        font-size: 1.2em;
+    }
+
+    .about-page .col-md-4 h2 {
+        margin-top: 0;
+        text-align: center;
+    }
+
+
+    .about-page .col-md-4 p, .about-page .col-md-4 ul {
+        font-size: 1.1em;
+        line-height: 1.6em;
+        list-style-type: none;
+    }
+
+    .about-page .col-md-4 ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+        .about-page .col-md-4 ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+            .about-page .col-md-4 ul li::before {
+                content: "\2714";
+                position: absolute;
+                left: 0;
+                color: #28a745;
+                margin-left: 95%
+            }
+
+    .img-fluid {
+        width: 75%
+    }
+
+    h1 {
+        padding: 0 0 40px;
+    }
+</style>

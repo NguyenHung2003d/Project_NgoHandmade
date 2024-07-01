@@ -14,8 +14,7 @@
 <link href="~/Content/assets/styles/single_styles.css" rel="stylesheet" />
 <link href="~/Content/assets/styles/single_responsive.css" rel="stylesheet" />
 
-@if (Model != null)
-{
+@if (Model != null) {
     <div class="container single_product_container">
         <div class="row">
             <div class="col">
@@ -24,25 +23,22 @@
 
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
-                        <li><a href="index.html">Trang chủ</a></li>
-                        <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Chi tiết sản phẩm</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                        <li><a href="@Url.Action("ProductDetail", "Home")"><i class="fa fa-angle-right" aria-hidden="true"></i>Chi tiết sản phẩm</a></li>
                     </ul>
                 </div>
-
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-7">
-                @if (!string.IsNullOrEmpty(Model.sImage))
-                {
+                @if (!string.IsNullOrEmpty(Model.sImage)) {
                     <div class="single_product_pics">
                         <div class="row">
                             <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
                                 <div class="single_product_thumbnails">
                                     <ul>
-                                        @for (int i = 0; i < 3; i++)
-                                        {
+                                        @for (int i = 0; i < 3; i++) {
                                             <li><img class="img-secondary" src="@Url.Content(Model.sImage)" alt="" data-image="@Model.sImage"></li>
                                         }
                                     </ul>
@@ -61,7 +57,7 @@
             @* Calculate old price and initialize quantity *@
             @{
                 double oldPrice = (Model.fPrice ?? 0) + 50000;
-                int quantity = 1;
+                
             }
 
             <div class="col-lg-5">
@@ -75,35 +71,9 @@
                         <span class="ti-truck"></span><span>Miễn phí vận chuyển</span>
                     </div>
                     <div class="original_price">@oldPrice</div>
-                    <div style="display: flex;flex-direction: row">
-                        <div class="product_price">@Model.fPrice</div>
-                        <ul class="star_rating" style="margin-top: 4px">
-                            @for (int i = 1; i <= 5; i++)
-                            {
-                                <li>
-                                    <i class="fa @((i <= (Model.tblReviews?.FirstOrDefault()?.iStarRating ?? 0)) ? "fa-star" : "fa-star-o")" aria-hidden="true" onclick="setRating(@i)"></i>
-                                </li>
-                            }
-                        </ul>
-                        <input type="hidden" id="iStarRating" name="iStarRating" value="@Model.tblReviews?.FirstOrDefault()?.iStarRating" />
-
-                        <form id="reviewForm" method="post" action="@Url.Action("AddReview", "Review")">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="FK_iProductID" value="@Model.PK_iProductID" />
-                            <input type="hidden" id="reviewStarRating" name="iStarRating" value="@Model.tblReviews?.FirstOrDefault()?.iStarRating" />
-                            <button type="submit" class="btn btn-primary ml-4 mt-2">Đánh giá</button>
-                        </form>
-                    </div>
-                    @if (Model.iQuantity > 0)
-                    {
-                        using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
-                        {
-                            <div class="product_color">
-                                <span>Màu sắc:</span>
-                                <ul>
-                                    <li style="background: @Model.sColor"></li>
-                                </ul>
-                            </div>
+                    <div class="product_price">@Model.fPrice</div>
+                    @if (Model.iQuantity > 0) {
+                        using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post)) {
                             <div class="quantity">
                                 <div class="d-flex">
                                     <span>Số lượng:</span>
@@ -118,67 +88,114 @@
                                 <input class="red_button add_to_cart_button show-add-cart m-0" type="submit" name="submit" value="Thêm vào giỏ" />
                             </div>
                         }
-                    }
-                    else
-                    {
+                    } else {
                         <p class="text-danger">This product is out of stock.</p>
                     }
+                </div>
+            </div>
+        </div>
 
-                    <script>
-                        function increaseQuantity() {
-                            const quantityInput = document.getElementById("quantity_value");
-                            let quantity = parseInt(quantityInput.value);
-                            const maxQuantity = parseInt(quantityInput.max);
-                            if (quantity < maxQuantity) {
-                                quantity++;
-                                quantityInput.value = quantity;
+        <!-- Comment and Rating Section -->
+        <div class="row mt-5">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Đánh giá sản phẩm</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (ViewBag.HasOrdered) {
+                            <form id="reviewForm" method="post" action="@Url.Action("AddReview", "Review")">
+                                <input type="hidden" name="FK_iProductID" value="@Model.PK_iProductID" />
+                                <input type="hidden" id="reviewStarRating" name="iStarRating" value="0" />
+                                <div class="form-group">
+                                    <label for="reviewStarRating">Chọn sao:</label>
+                                    <ul class="star_rating list-inline">
+                                        @for (int i = 1; i <= 5; i++) {
+                                            <li class="list-inline-item">
+                                                <i class="fa fa-star-o" aria-hidden="true" onclick="setRating(@i)"></i>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reviewComment">Bình luận:</label>
+                                    <textarea class="form-control full-width-textarea" id="reviewComment" name="sComment" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Đánh giá</button>
+                            </form>
+                        } else {
+                            <p class="text-danger">Bạn cần mua sản phẩm này trước khi có thể đánh giá.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display existing reviews -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Đánh giá khác</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="existing-reviews">
+                            @foreach (var review in ViewBag.Reviews) {
+                                <div class="review">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <p><strong>@review.tblUser.sEmail</strong> - @review.iStarRating sao</p>
+                                            <p>@review.sComment</p>
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item edit-review" href="#" data-id="@review.PK_iReviewID" data-comment="@review.sComment" data-rating="@review.iStarRating">Sửa</a>
+                                                <a class="dropdown-item delete-review" href="#" data-id="@review.PK_iReviewID">Xóa</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             }
-                        }
-
-                        function decreaseQuantity() {
-                            const quantityInput = document.getElementById("quantity_value");
-                            let quantity = parseInt(quantityInput.value);
-                            if (quantity > 1) {
-                                quantity--;
-                                quantityInput.value = quantity;
-                            }
-                        }
-
-                        function setRating(rating) {
-                            document.getElementById("iStarRating").value = rating;
-                            document.getElementById("reviewStarRating").value = rating;
-                            var stars = document.querySelectorAll(".star_rating i");
-                            stars.forEach((star, index) => {
-                                star.className = index < rating ? "fa fa-star" : "fa fa-star-o";
-                            });
-                        }
-
-                        document.getElementById("reviewForm").addEventListener("submit", function (event) {
-                            event.preventDefault();
-                            var form = this;
-                            var formData = new FormData(form);
-
-                            fetch(form.action, {
-                                method: form.method,
-                                body: formData,
-                                headers: {
-                                    'X-Requested-With': 'XMLHttpRequest'
-                                }
-                            })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.success) {
-                                        alert("Đánh giá của bạn đã được gửi thành công!");
-                                    } else {
-                                        alert("Có lỗi xảy ra. Vui lòng thử lại.");
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error("Error:", error);
-                                    alert("Có lỗi xảy ra. Vui lòng thử lại.");
-                                });
-                        });
-                    </script>
+                        </div>
+                    </div>
+                    <!-- Edit Review Modal -->
+                    <div class="modal fade" id="editReviewModal" tabindex="-1" role="dialog" aria-labelledby="editReviewModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editReviewModalLabel">Sửa đánh giá</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="editReviewForm">
+                                        <input type="hidden" id="reviewId" name="PK_iReviewID" />
+                                        <div class="form-group">
+                                            <label for="editStarRating">Chọn sao:</label>
+                                            <ul class="star_rating list-inline">
+                                                @for (int i = 1; i <= 5; i++) {
+                                                    <li class="list-inline-item">
+                                                        <i class="fa fa-star-o" aria-hidden="true" onclick="setEditRating(@i)"></i>
+                                                    </li>
+                                                }
+                                            </ul>
+                                            <input type="hidden" id="editStarRating" name="iStarRating" value="0" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="editComment">Bình luận:</label>
+                                            <textarea class="form-control" id="editComment" name="sComment" rows="3"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    <button type="button" class="btn btn-primary" id="saveEditReview">Lưu thay đổi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,4 +204,129 @@
 
 @section scripts{
     <script src="~/Content/assets/js/single_custom.js"></script>
+    <script>
+        function setRating(rating) {
+            document.getElementById("reviewStarRating").value = rating;
+            var stars = document.querySelectorAll(".star_rating .fa");
+            stars.forEach(function (star, index) {
+                if (index < rating) {
+                    star.classList.remove("fa-star-o");
+                    star.classList.add("fa-star");
+                } else {
+                    star.classList.remove("fa-star");
+                    star.classList.add("fa-star-o");
+                }
+            });
+        }
+        function increaseQuantity() {
+            var quantityInput = document.getElementById("quantity_value");
+            var currentValue = parseInt(quantityInput.value);
+            var maxValue = parseInt(quantityInput.max);
+            if (currentValue < maxValue) {
+                quantityInput.value = currentValue + 1;
+            }
+        }
+
+        function decreaseQuantity() {
+            var quantityInput = document.getElementById("quantity_value");
+            var currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        }
+        function setEditRating(rating) {
+            document.getElementById("editStarRating").value = rating;
+            var stars = document.querySelectorAll("#editReviewModal .star_rating .fa");
+            stars.forEach(function (star, index) {
+                if (index < rating) {
+                    star.classList.remove("fa-star-o");
+                    star.classList.add("fa-star");
+                } else {
+                    star.classList.remove("fa-star");
+                    star.classList.add("fa-star-o");
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $('#reviewForm').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '@Url.Action("AddReview", "Review")',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        alert(response.message);
+                        if (response.success) {
+                            location.reload();
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                    }
+                });
+            });
+
+            $('.delete-review').click(function (e) {
+                e.preventDefault();
+                var reviewId = $(this).data('id');
+                if (confirm('Bạn có chắc chắn muốn xóa đánh giá này?')) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteReview", "Review")',
+                        type: 'POST',
+                        data: {
+                            PK_iReviewID: reviewId,
+                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        success: function (response) {
+                            alert(response.message);
+                            if (response.success) {
+                                location.reload();
+                            }
+                        },
+                        error: function () {
+                            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                        }
+                    });
+                }
+            });
+
+            $('.edit-review').click(function (e) {
+                e.preventDefault();
+                var reviewId = $(this).data('id');
+                var comment = $(this).data('comment');
+                var rating = $(this).data('rating');
+                $('#editReviewModal #reviewId').val(reviewId);
+                $('#editReviewModal #editStarRating').val(rating);
+                $('#editReviewModal #editComment').val(comment);
+                setEditRating(rating); // Cập nhật sao trong modal
+                $('#editReviewModal').modal('show');
+            });
+
+            $('#saveEditReview').click(function () {
+                var reviewId = $('#editReviewModal #reviewId').val();
+                var rating = $('#editReviewModal #editStarRating').val();
+                var comment = $('#editReviewModal #editComment').val();
+                $.ajax({
+                    url: '@Url.Action("EditReview", "Review")',
+                    type: 'POST',
+                    data: {
+                        PK_iReviewID: reviewId,
+                        iStarRating: rating,
+                        sComment: comment,
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function (response) {
+                        alert(response.message);
+                        if (response.success) {
+                            location.reload();
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                    }
+                });
+            });
+        });
+    </script>
 }

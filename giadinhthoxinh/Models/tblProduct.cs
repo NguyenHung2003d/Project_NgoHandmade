@@ -28,6 +28,7 @@ namespace giadinhthoxinh.Models
         public int FK_iPromoteID { get; set; }
         public string sProductName { get; set; }
         public string sDescribe { get; set; }
+        public string AvailableSizes { get; set; }
         public Nullable<double> fPrice { get; set; }
         public string sColor { get; set; }
         public string sSize { get; set; }

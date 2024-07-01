@@ -43,17 +43,15 @@
                                 <ul class="navbar_user" style="width: 500px; display: flex; justify-content: space-between;">
                                     @using (Html.BeginForm("Search", "Home", FormMethod.Get)) {
 
-                                        <li>
-                                            <div style="width: 200px">
 
-                                                @if (Session["Search"] != null) {
-                                                    <input class="form-control" name="searchString" type="text" placeholder="Tìm kiếm sản phẩm" value=" @Session["Search"].ToString()"> } else {
-                                                    <input class="form-control" name="searchString" type="text" placeholder="Tìm kiếm sản phẩm">
-                                                }
+                                        <div style="width=100px">
 
-                                            </div>
-                                        </li>
+                                            @if (Session["Search"] != null) {
+                                                <input class="form-control" name="searchString" type="text" placeholder="Tìm kiếm sản phẩm" value=" @Session["Search"].ToString()"> } else {
+                                                <input class="form-control" name="searchString" type="text" placeholder="Tìm kiếm sản phẩm">
+                                            }
 
+                                        </div>
                                     }
                                     @{ var u = Session["User"] as giadinhthoxinh.Models.tblUser; }
 
@@ -70,13 +68,8 @@
                 </div>
             </div>
         </header>
+
         @RenderBody()
-
-
-
-
-
-
         <!-- Footer -->
         <footer class="footer color-main under-footer">
             <div class="row">

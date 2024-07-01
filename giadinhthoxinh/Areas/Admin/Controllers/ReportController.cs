@@ -7,23 +7,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace giadinhthoxinh.Areas.Admin.Controllers
-{
-    public class ReportController : Controller
-    {
+namespace giadinhthoxinh.Areas.Admin.Controllers {
+    public class ReportController : Controller {
         string str = @"Data Source=localhost;Database=giadinhthoxinh;MultipleActiveResultSets=true;TrustServerCertificate=True;User ID=sa;Password=123";
         SqlConnection connection;
         SqlCommand command;
         SqlDataAdapter adapter = new SqlDataAdapter();
         // GET: Admin/Report
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             return View();
         }
-        public ActionResult TKNhapHang()
-        {
-            if (Session["QuanLy"] != null)
-            {
+        public ActionResult TKNhapHang() {
+            if (Session["QuanLy"] != null) {
 
                 DataTable table1 = new DataTable();
                 connection = new SqlConnection(str);
@@ -34,32 +29,27 @@ namespace giadinhthoxinh.Areas.Admin.Controllers
                 table1.Clear();
                 adapter.Fill(table1);
                 List<NhapHang> ds = new List<NhapHang>();
-                for (int i = 0; i < table1.Rows.Count; i++)
-                {
+                for (int i = 0; i < table1.Rows.Count; i++) {
                     NhapHang kq = new NhapHang();
 
                     kq.ID = table1.Rows[i]["FK_iProductID"].ToString();
-                    kq.Name= table1.Rows[i]["sProductName"].ToString();
+                    kq.Name = table1.Rows[i]["sProductName"].ToString();
                     kq.Description = table1.Rows[i]["sDescribe"].ToString();
                     kq.Price = table1.Rows[i]["fPrice"].ToString();
-                    kq.Quatity= table1.Rows[i]["soluong"].ToString();
+                    kq.Quatity = table1.Rows[i]["soluong"].ToString();
                     ds.Add(kq);
                 }
                 ViewBag.MyList = ds;
 
                 return View();
 
-            }
-            else
-            {
+            } else {
                 return RedirectToAction("KhongDuThamQuyen", "PhanQuyen");
             }
 
         }
-        public ActionResult TKBanHang()
-        {
-            if (Session["QuanLy"] != null)
-            {
+        public ActionResult TKBanHang() {
+            if (Session["QuanLy"] != null) {
 
                 DataTable table1 = new DataTable();
                 connection = new SqlConnection(str);
@@ -70,8 +60,7 @@ namespace giadinhthoxinh.Areas.Admin.Controllers
                 table1.Clear();
                 adapter.Fill(table1);
                 List<NhapHang> ds = new List<NhapHang>();
-                for (int i = 0; i < table1.Rows.Count; i++)
-                {
+                for (int i = 0; i < table1.Rows.Count; i++) {
                     NhapHang kq = new NhapHang();
 
                     kq.ID = table1.Rows[i]["FK_iProductID"].ToString();
@@ -85,17 +74,13 @@ namespace giadinhthoxinh.Areas.Admin.Controllers
 
                 return View();
 
-            }
-            else
-            {
+            } else {
                 return RedirectToAction("KhongDuThamQuyen", "PhanQuyen");
             }
 
         }
-        public ActionResult SanPhamBanChay()
-        {
-            if (Session["QuanLy"] != null)
-            {
+        public ActionResult SanPhamBanChay() {
+            if (Session["QuanLy"] != null) {
 
                 DataTable table1 = new DataTable();
                 connection = new SqlConnection(str);
@@ -106,8 +91,7 @@ namespace giadinhthoxinh.Areas.Admin.Controllers
                 table1.Clear();
                 adapter.Fill(table1);
                 List<NhapHang> ds = new List<NhapHang>();
-                for (int i = 0; i < table1.Rows.Count; i++)
-                {
+                for (int i = 0; i < table1.Rows.Count; i++) {
                     NhapHang kq = new NhapHang();
 
                     kq.ID = table1.Rows[i]["FK_iProductID"].ToString();
@@ -121,16 +105,12 @@ namespace giadinhthoxinh.Areas.Admin.Controllers
 
                 return View();
 
-            }
-            else
-            {
+            } else {
                 return RedirectToAction("KhongDuThamQuyen", "PhanQuyen");
             }
         }
-        public ActionResult TKLoaiSanPham()
-        {
-            if (Session["QuanLy"] != null)
-            {
+        public ActionResult TKLoaiSanPham() {
+            if (Session["QuanLy"] != null) {
 
                 DataTable table1 = new DataTable();
                 connection = new SqlConnection(str);
@@ -141,12 +121,11 @@ namespace giadinhthoxinh.Areas.Admin.Controllers
                 table1.Clear();
                 adapter.Fill(table1);
                 List<TkLoaiSp> ds = new List<TkLoaiSp>();
-                for (int i = 0; i < table1.Rows.Count; i++)
-                {
+                for (int i = 0; i < table1.Rows.Count; i++) {
                     TkLoaiSp kq = new TkLoaiSp();
 
                     kq.ID = table1.Rows[i]["PK_iCategoryID"].ToString();
-                    kq.Name = table1.Rows[i]["sCategoryName"].ToString();                 
+                    kq.Name = table1.Rows[i]["sCategoryName"].ToString();
                     kq.Quantity = table1.Rows[i]["soluong"].ToString();
                     ds.Add(kq);
                 }
@@ -154,11 +133,9 @@ namespace giadinhthoxinh.Areas.Admin.Controllers
 
                 return View();
 
-            }
-            else
-            {
+            } else {
                 return RedirectToAction("KhongDuThamQuyen", "PhanQuyen");
             }
-        }    
+        }
     }
 }

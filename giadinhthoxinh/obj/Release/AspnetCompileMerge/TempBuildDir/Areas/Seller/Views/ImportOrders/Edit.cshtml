@@ -1,0 +1,81 @@
+﻿@model giadinhthoxinh.Models.tblImportOrder
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
+</ul>
+}
+
+<section class="content-header p-2">
+</section>
+
+<section class="content ml-2 mr-2">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-danger text-lg ">Sửa thông tin hóa đơn nhập</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal w-75 m-auto container">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.PK_iImportOrderID)
+
+                        <div class="row">
+                            <div class="form-group col">
+                                @Html.LabelFor(model => model.FK_iAccountID, "Người lập", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("FK_iAccountID", null, htmlAttributes: new { @class = "form-control", @style = "height: 32.4px" })
+                                @Html.ValidationMessageFor(model => model.FK_iAccountID, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col">
+                                @Html.LabelFor(model => model.FK_iSupplierID, "Nhà cung cấp", htmlAttributes: new { @class = "control-label " })
+                                @Html.DropDownList("FK_iSupplierID", null, htmlAttributes: new { @class = "form-control", @style = "height: 32.4px" })
+                                @Html.ValidationMessageFor(model => model.FK_iSupplierID, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col">
+                                <label class="control-label" for="dtDateAdded">Ngày thêm vào</label>
+                                @Html.EditorFor(model => model.dtDateAdded, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.dtDateAdded, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col">
+                                <label class="control-label" for="sDeliver">Hãng giao hàng</label>
+                                @Html.EditorFor(model => model.sDeliver, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.sDeliver, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col">
+                                @*@Html.LabelFor(model => model.iState, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.iState, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.iState, "", new { @class = "text-danger" })*@
+                            </div>
+
+                            <div class="form-group col">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="">
+                                @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary btn-secondary" })
+                                <input type="submit" value="Lưu" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+</section>

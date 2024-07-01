@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\content\\assets\\styles\\index1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\content\\assets\\styles\\index1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\views\\user\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\views\\user\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\views\\user\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|c:\\users\\lenovo\\source\\repos\\project_ngohandmade\\giadinhthoxinh\\models\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4F83C1E3-2C27-411C-A9F3-96E5F6BDBFAD}|giadinhthoxinh\\giadinhthoxinh.csproj|solutionrelative:giadinhthoxinh\\models\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -67,53 +75,78 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Login.cshtml",
-              "RelativeDocumentMoniker": "giadinhthoxinh\\Views\\User\\Login.cshtml",
-              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Login.cshtml",
-              "RelativeToolTip": "giadinhthoxinh\\Views\\User\\Login.cshtml",
-              "ViewState": "AQIAAGIAAAAAAAAAAAAuwHEAAABqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-25T07:23:45.784Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "tblUser.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Models\\tblUser.cs",
-              "RelativeDocumentMoniker": "giadinhthoxinh\\Models\\tblUser.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Models\\tblUser.cs",
-              "RelativeToolTip": "giadinhthoxinh\\Models\\tblUser.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAQwCYAAAAhAAAA",
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "giadinhthoxinh\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\CartController.cs",
+              "RelativeToolTip": "giadinhthoxinh\\Controllers\\CartController.cs",
+              "ViewState": "AQIAAPUAAAAAAAAAAAAmwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T07:17:23.839Z",
+              "WhenOpened": "2024-07-01T11:10:09.635Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Index1.css",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Content\\assets\\styles\\Index1.css",
-              "RelativeDocumentMoniker": "giadinhthoxinh\\Content\\assets\\styles\\Index1.css",
-              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Content\\assets\\styles\\Index1.css",
-              "RelativeToolTip": "giadinhthoxinh\\Content\\assets\\styles\\Index1.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-06-25T07:07:05.584Z",
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "giadinhthoxinh\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "giadinhthoxinh\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-01T11:10:05.159Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ReviewController.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\ReviewController.cs",
+              "RelativeDocumentMoniker": "giadinhthoxinh\\Controllers\\ReviewController.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\ReviewController.cs",
+              "RelativeToolTip": "giadinhthoxinh\\Controllers\\ReviewController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-01T11:08:25.597Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Register.cshtml",
               "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Register.cshtml",
               "RelativeDocumentMoniker": "giadinhthoxinh\\Views\\User\\Register.cshtml",
               "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Register.cshtml",
               "RelativeToolTip": "giadinhthoxinh\\Views\\User\\Register.cshtml",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAuwFMAAAAGAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-25T07:03:31.444Z",
+              "WhenOpened": "2024-07-01T08:52:59.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "giadinhthoxinh\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Controllers\\UserController.cs",
+              "RelativeToolTip": "giadinhthoxinh\\Controllers\\UserController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAJoAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-01T08:36:02.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Login.cshtml",
+              "RelativeDocumentMoniker": "giadinhthoxinh\\Views\\User\\Login.cshtml",
+              "ToolTip": "C:\\Users\\LENOVO\\source\\repos\\Project_NgoHandmade\\giadinhthoxinh\\Views\\User\\Login.cshtml",
+              "RelativeToolTip": "giadinhthoxinh\\Views\\User\\Login.cshtml",
+              "ViewState": "AQIAABoAAAAAAAAAAAAuwJEAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-01T08:29:22.285Z",
               "EditorCaption": ""
             }
           ]

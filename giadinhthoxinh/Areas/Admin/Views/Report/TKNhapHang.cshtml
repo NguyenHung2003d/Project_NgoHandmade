@@ -20,7 +20,7 @@
         <div class="card-header">
             <h1 class="card-title text-lg text-danger">Thống kê nhập hàng</h1>
 
-           
+
         </div>
 
         <div class="card-body table-responsive text-nowrap">
@@ -45,26 +45,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in ViewBag.MyList)
-                    {
-                    <tr>
-                        <td>
-                            @item.ID
-                        </td>
-                        <td>
-                            @item.Name
-                        </td>
-                        <td>
-                            @item.Description
-                        </td>
-                        <td>
-                            @item.Price
-                        </td>
-                        <td>
-                            @item.Quatity
-                        </td>
+                    @foreach (var item in ViewBag.MyList) {
+                        <tr>
+                            <td>
+                                @item.ID
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.Description
+                            </td>
+                            <td>
+                                @item.Price
+                            </td>
+                            <td>
+                                @item.Quatity
+                            </td>
 
-                    </tr>}
+                        </tr>
+}
                 </tbody>
             </table>
         </div>

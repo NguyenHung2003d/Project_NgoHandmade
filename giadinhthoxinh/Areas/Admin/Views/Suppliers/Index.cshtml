@@ -5,6 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+
 @section naviheader{
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -42,8 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
+                    @foreach (var item in Model) {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.sSupplierName)
@@ -58,7 +58,7 @@
                                 @Html.DisplayFor(modelItem => item.sAddress)
                             </td>
                             <td>
-                                @Html.ActionLink("Sửa", "Edit", new { id = item.PK_iSupplierID }, new { @class = "btn btn-primary btn-warning" }) 
+                                @Html.ActionLink("Sửa", "Edit", new { id = item.PK_iSupplierID }, new { @class = "btn btn-primary btn-warning" })
                             </td>
                         </tr>
                     }

@@ -1,0 +1,195 @@
+﻿@model giadinhthoxinh.Models.tblUser
+@{
+    ViewBag.Title = "Login";
+}
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+    <symbol id="check-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+    </symbol>
+    <symbol id="info-fill" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+    </symbol>
+    <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </symbol>
+</svg>
+<section class="bg-content-main" style="width: 100vw; height: 100vh;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="~/Content/assets/images/logo/logo-login.jpg"
+                                                              alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+                                <h2>Đăng nhập</h2>
+
+                                @if (TempData["SuccessMessage"] != null) {
+                                    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert" id="successMessage">
+                                        <svg class="bi flex-shrink-0 me-2" width="16" height="16" role="img" aria-label="Success:">
+                                            <use xlink:href="#check-circle-fill" />
+                                        </svg>
+                                        <strong>@TempData["SuccessMessage"]</strong>
+                                        <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    TempData.Remove("SuccessMessage");
+                                }
+
+                                @if (!ViewData.ModelState.IsValid) {
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors)) {
+                                            <strong>@modelError.ErrorMessage</strong>
+                                        }
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                }
+
+                                <div id="login-section" style="@(ViewBag.ShowForgotPasswordSection == true || ViewBag.ShowVerificationCodeSection == true || ViewBag.ShowNewPasswordSection == true ? "display: none;" : "")">
+                                    @using (Html.BeginForm("Login", "User", FormMethod.Post)) {
+                                        <div class="form-group">
+                                            @Html.Label("Email")
+                                            @Html.TextBoxFor(m => m.sEmail, new { @class = "form-control", type = "email" })
+                                            @Html.ValidationMessageFor(m => m.sEmail, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Mật khẩu")
+                                            @Html.PasswordFor(m => m.sPass, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.sPass, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Login" class="btn btn-primary" />
+                                        </div>
+                                    }
+
+                                    <div class="form-group">
+                                        <a href="#" id="forgot-password-link">Quên mật khẩu?</a>
+                                    </div>
+
+                                    <div class="mt-3 text-center">
+                                        <p class="small text-muted">Bạn chưa có tài khoản? <a href="@Url.Action("Register", "User")">Đăng ký ngay</a></p>
+                                    </div>
+                                </div>
+
+                                <div id="forgot-password-section" style="@(ViewBag.ShowForgotPasswordSection == true ? "" : "display: none;")">
+                                    @using (Html.BeginForm("SendVerificationCode", "User", FormMethod.Post)) {
+                                        <div class="form-group">
+                                            @Html.Label("Email", new { @class = "form-label" })
+                                            <input type="email" name="email" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Send Verification Code" class="btn btn-primary" />
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <a href="#" id="back-to-login-link">Trở về trang đăng nhập</a>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div id="verification-code-section" style="@(ViewBag.ShowVerificationCodeSection == true ? "" : "display: none;")">
+                                    @using (Html.BeginForm("VerifyCode", "User", FormMethod.Post)) {
+                                        <div class="form-group">
+                                            @Html.Label("Verification Code", new { @class = "form-label" })
+                                            <input type="text" name="verificationCode" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Verify Code" class="btn btn-primary" />
+                                        </div>
+                                    }
+                                </div>
+
+                                <div id="new-password-section" style="@(ViewBag.ShowNewPasswordSection == true ? "" : "display: none;")">
+                                    @using (Html.BeginForm("ResetPassword", "User", FormMethod.Post)) {
+                                        <div class="form-group">
+                                            @Html.Label("New Password", new { @class = "form-label" })
+                                            <input type="password" name="newPassword" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Reset Password" class="btn btn-primary" />
+                                        </div>
+                                    }
+                                </div>
+
+                                <div id="google-login-section" style="@(ViewBag.ShowForgotPasswordSection == true || ViewBag.ShowVerificationCodeSection == true || ViewBag.ShowNewPasswordSection == true ? "display: none;" : "")">
+                                    @using (Html.BeginForm("ExternalLogin", "User", new { provider = "Google", returnUrl = "/" }, FormMethod.Post, new { id = "googleLoginForm" })) {
+                                        <div class="form-group d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-lg google-login-button">
+                                                <img src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="Google Icon" style="width: 24px; height: 24px; margin-right: 5px;" />
+                                                Đăng nhập bằng Google
+                                            </button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var timeoutMessage = '@TempData["TimeoutMessage"]';
+  if (timeoutMessage) {
+      alert(timeoutMessage); // Hiển thị thông báo timeout nếu có
+      @TempData.Remove("TimeoutMessage"); // Xóa thông báo sau khi hiển thị
+  }
+
+  // Tự động đăng xuất sau 15 phút không hoạt động
+  var inactivityTimeout = 2 * 60 * 1000; // (tính bằng mili giây)
+  var timeoutId;
+
+  function resetTimer() {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(logout, inactivityTimeout);
+  }
+
+  function logout() {
+      window.location.href = '@Url.Action("Logout", "User")'; // Chuyển hướng đến action Logout
+  }
+
+  // Bắt đầu đếm thời gian không hoạt động
+  resetTimer();
+
+  // Reset timer khi có hoạt động của chuột, bàn phím hoặc chạm
+  document.addEventListener("mousemove", resetTimer);
+  document.addEventListener("keydown", resetTimer);
+  document.addEventListener("touchstart", resetTimer);
+
+    document.getElementById("forgot-password-link").addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("login-section").style.display = "none";
+        document.getElementById("forgot-password-section").style.display = "";
+        document.getElementById("google-login-section").style.display = "none";
+        document.querySelector(".card-body h2").textContent = "Quên mật khẩu";
+    });
+
+    document.getElementById("back-to-login-link").addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("login-section").style.display = "";
+        document.getElementById("forgot-password-section").style.display = "none";
+        document.getElementById("verification-code-section").style.display = "none";
+        document.getElementById("new-password-section").style.display = "none";
+        document.getElementById("google-login-section").style.display = "";
+        document.querySelector(".card-body h2").textContent = "Đăng nhập";
+    });
+
+    function checkAndHideGoogleLogin() {
+        if (document.getElementById("verification-code-section").style.display != "none" || document.getElementById("new-password-section").style.display != "none") {
+            document.getElementById("googleLoginForm").style.display = "none";
+            var titleElement = document.querySelector(".card-body h2");
+            if (titleElement) {
+                titleElement.textContent = "Quên mật khẩu";
+            }
+        }
+    }
+    document.addEventListener("DOMContentLoaded", checkAndHideGoogleLogin);
+    window.addEventListener("hashchange", checkAndHideGoogleLogin);
+</script>

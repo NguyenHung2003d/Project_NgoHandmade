@@ -1,0 +1,122 @@
+﻿@model IEnumerable<giadinhthoxinh.Models.tblSupplier>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+}
+
+<section class="content-header p-2">
+</section>
+
+<section class="content ml-2 mr-2">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title text-lg text-danger">Danh sách cửa hàng</h3>
+        </div>
+
+        <div class="card-body table-responsive text-nowrap">
+            @if (Model.Count() == 0)
+            {
+                <div class="mx-auto">
+                    <div class="text-center">
+                        <p>Chưa có cửa hàng nào</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <table class="table table-hover table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>
+                                Tên cửa hàng
+                            </th>
+                            <th>
+                                Số điện thoại cửa hàng
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Địa chỉ
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sSupplierName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sPhone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sEmail)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sAddress)
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        @Html.ActionLink("Sửa", "Edit", new { id = item.PK_iSupplierID }, new { @class = "btn btn-primary btn-warning mr-2" })
+                                        @using (Html.BeginForm("Delete", "Suppliers", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("id", item.PK_iSupplierID)
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@item.PK_iSupplierID">
+                                                Xóa
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="@item.PK_iSupplierID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Cảnh báo</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Bạn chắc chắn muốn xóa cửa hàng @item.sSupplierName
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <input type="submit" value="Xóa" class="btn btn-danger" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <div class="card-tools text-center">
+                @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+
+        <div class="card-footer">
+
+        </div>
+    </div>
+</section>

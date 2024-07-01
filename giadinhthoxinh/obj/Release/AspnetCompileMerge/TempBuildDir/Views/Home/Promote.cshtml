@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Promote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table" style="display:flex;flex-direction:column;justify-content:center;align-items:center">
+    <thead>
+        <tr>
+            <th>Promote ID</th>
+            <th>Promote Name</th>
+            <th>Promote Rate</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var promote in Model)
+        {
+            <tr>
+                <td>@promote.PK_iPromoteID</td>
+                <td>@promote.sPromoteName</td>
+                <td>@promote.sPromoteRate %</td>
+                <td>@promote.dtStartDay.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>@promote.dtEndDay.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -70,12 +70,13 @@
                 </li>
             </ul>
         </nav>
+        <!-- /.navbar -->
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/admin/home" class="brand-link">
-                <img src="~/Content/assets/images/logo_handmade.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Ngõ Handmade</span>
+                <img src="~/Content/clients/dist/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">giadinhthoxinh</span>
             </a>
 
             @Html.Partial("_PartialSideBar")
@@ -87,7 +88,10 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <p style="text-align:center"><strong>ngohandmade.com</strong></p>
+            <div class="float-right d-none d-sm-block">
+                <b>ĐATN</b>
+            </div>
+            <p style="text-align:center"><strong><a href="https://adminlte.io">giadinhthoxinh.com</a></strong></p>
         </footer>
 
         <!-- Control Sidebar -->
@@ -123,9 +127,10 @@
     <!-- AdminLTE App -->
     <script src="~/Content/clients/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
+    @*<script src="~/Content/clients/dist/js/demo.js"></script>*@
     <!-- Page specific script -->
     <script>
-    $(function () {
+        $(function () {
             //Initialize Select2 Elements
             $('.select2').select2()
 
@@ -256,7 +261,7 @@
         document.querySelector("#actions .cancel").onclick = function () {
             myDropzone.removeAllFiles(true)
         }
-      // DropzoneJS Demo Code End</script>
+        // DropzoneJS Demo Code End</script>
     @RenderSection("script", required: false)
 </body>
 </html>

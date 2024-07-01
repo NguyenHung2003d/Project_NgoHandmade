@@ -196,9 +196,13 @@
     <Compile Include="Areas\Admin\Controllers\PermissionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhanquyenController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReviewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -265,10 +269,15 @@
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Content\assets\images\khan_len\khăn_5_1.jpg" />
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <None Include="Views\Cart\VNPayReturn.cshtml" />
+    <Content Include="Areas\Admin\Views\Reviews\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Reviews\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Reviews\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Reviews\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Reviews\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\hung234-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\hung234-001-site1 - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\hung234-001-site1 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\hung234-001-site1 - Web Deploy1.pubxml" />
     <Compile Include="VnPayLibrary.cs" />
     <None Include="Areas\Admin\Views\Phanquyen\KhongDuThamQuyen.cshtml" />
     <Compile Include="Areas\Seller\Controllers\CategoriesController.cs" />
@@ -290,9 +299,6 @@
     <Compile Include="Areas\Seller\Filter\SupplierFilter.cs" />
     <Compile Include="Areas\Seller\SellerAreaRegistration.cs" />
     <None Include="Areas\Seller\Views\Categories\Details.cshtml" />
-    <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -301,6 +307,16 @@
     <Compile Include="Models\ProductInCart.cs" />
     <Compile Include="Models\TkLoaiSp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Cart\CartPartial.cshtml" />
+    <Content Include="Views\Cart\Checkout.cshtml" />
+    <Content Include="Views\Cart\VNPayReturn.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Checkout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\ProductDetail.cshtml" />
+    <Content Include="Views\Home\Promote.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\images\banner\banner1.jpg" />
@@ -2655,20 +2671,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\ProductDetail.cshtml" />
-    <Content Include="Views\Home\Checkout.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Permission.cshtml" />
-    <Content Include="Views\Cart\Cart.cshtml" />
-    <Content Include="Views\Cart\Checkout.cshtml" />
-    <Content Include="Views\Home\Promote.cshtml" />
     <Content Include="Views\User\Register1.cshtml" />
-    <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\User\AccountPartial.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\EditPassword.cshtml" />
   </ItemGroup>
